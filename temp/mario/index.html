@@ -1,0 +1,265 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>American History Memory Game</title>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/less/dist/less-1.5.0.js"></script>
+<script src="bower_components/prefixfree/prefixfree.js"></script>
+<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+<script src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
+
+<script>
+var app = angular.module("myapp", ["firebase"]);
+</script>
+
+<script src="CardImages.js"></script>
+<script src="MemoryCardGame.js"></script>
+
+<style type="text/less">
+@cardSize: 120px;
+@cardMargin: 5px;
+@cardBorder: 10px;
+@scoreWidth: 200px;
+@allCardsWidth: (@cardSize+@cardBorder)*5+@cardMargin*4;
+
+body {
+    margin: 0px;
+    /* http://www.lawyersgunsmoneyblog.com/wp-content/uploads/2012/08/american-flag-2a.jpg */
+    background-image: url(images/american-flag-2a.jpg);
+    background-size: cover;
+}
+
+* {
+    /* http://stackoverflow.com/questions/12967441/disable-mobile-browser-click-touch-tap-feedback-box */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+
+.scoreBoard {
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    width: @scoreWidth;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.allCardsWrapper {
+    position: absolute;
+    left: @scoreWidth;
+    right: 0px;
+}
+
+.allCards {
+    margin: 0 auto;
+    width: @allCardsWidth;
+}
+
+.flip-container {
+    perspective: 1000;
+}
+
+.flip-container, .front, .back {
+    width: @cardSize;
+    height: @cardSize;
+    box-sizing: border-box;
+
+    /* The animations we do are laggy (esp on firefox) if we let the browser
+     * do its default aliasing. This disables that. */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimizeQuality;
+}
+
+.front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    border-radius: 15px;
+    border: 4px solid black;
+
+    /* slightly oversized so the border will cover it up a little */
+    background-size: @cardSize+@cardBorder @cardSize+@cardBorder;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.front {
+    /* Some of the images are transparent. This makes them all consistent. */
+    background-color: white;
+}
+
+.back {
+    cursor: pointer;
+
+    /* While waiting for the background image to load, we don't want to
+     * accidentally show any cards. Setting a background-color prevents that. */
+    background-color: black;
+}
+
+.card-container {
+   margin: @cardMargin;
+   display: inline-block;
+   position: relative;
+}
+
+.dialogBox {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 50%);
+
+    text-align: center;
+}
+
+.dialogBox > div {
+    max-width: 400px;
+    margin: 0px auto;
+    background: rgba(255, 0, 0, 0.8);
+    padding: 5px;
+}
+.dialogBox ol {
+    text-align: left;
+}
+
+.playButton {
+    width: 400px;
+    height: 50px;
+}
+
+li.myScore {
+    font-weight: bold;
+}
+
+/*** Animations ***/
+
+@keyframes flipCard {
+    from {
+        transform: scale(1.0, 1);
+    }
+    50% {
+        transform: scale(0, 1);
+    }
+    to {
+        transform: scale(1.0, 1);
+    }
+}
+
+.flip-container.visible {
+    animation: flipCard @cardFlipTime ease-out 0s 1;
+}
+
+/* workaround for no 3d css support */
+.flip-container .front {
+    transition: z-index 0s ease-out @cardFlipTime/2.0;
+}
+.flip-container.visible .front {
+    z-index: 2;
+}
+
+.flip-container2.found {
+    animation:
+        bounceOutUp @successOrFailTime ease-out @cardFlipTime 1;
+    animation-fill-mode: forwards;
+}
+
+.flip-container2.wrongChoice {
+    animation:
+        shake @successOrFailTime ease-out @cardFlipTime 1;
+}
+
+</style>
+
+<link rel="stylesheet" href="bower_components/animate.css/animate.css">
+
+<script>
+function toSeconds(millis) {
+    return millis/1000.0 + "s";
+}
+var cardFlipTime = (1/5.0)*1000;
+var successOrFailTime = (1)*1000;
+var lessVars = {
+    cardFlipTime: toSeconds(cardFlipTime),
+    successOrFailTime: toSeconds(successOrFailTime)
+};
+var animationTime = cardFlipTime + successOrFailTime;
+
+less.modifyVars(lessVars);
+</script>
+
+</head>
+<body ng-app="myapp">
+<div ng-controller="MemoryGameCtrl">
+    <div class="scoreBoard">
+        <h2>Best time</h2>
+        <h3 ng-if="highScores.length > 0">{{ highScores[0].value | number: 2 }}</h3>
+        <h3 ng-if="highScores.length == 0">No best time yet</h3>
+
+        <div ng-if="startTime !== null">
+            <h2>Current time</h2>
+            <h3 ng-if="getElapsedTime() !== null && endTime === null">
+                {{ getElapsedTime() | number: 0 }}
+            </h3>
+            <h3 ng-if="getElapsedTime() !== null && endTime !== null">
+                {{ getElapsedTime() | number: 2 }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="allCardsWrapper">
+        <div class="allCards">
+            <div class="card-container" ng-repeat="card in cards">
+                <div class="flip-container"
+                   ng-click="cardClicked(card)"
+                   ontouchstart="angular.element(this).triggerHandler('click')"
+                   ng-class="{'visible': card.visible, 'found': card.found}">
+                  <div class="flip-container2"
+                      ng-class="{'found': card.found, 'wrongChoice': card.wrongChoice}">
+                    <div class="front" ng-style="card.urlCss">
+                       <!-- front content -->
+                    </div>
+                    <div class="back" style='background-image: url("images/back.png");'>
+                       <!-- back content -->
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialogBox" ng-show="showHighScores">
+        <div>
+            <span ng-if="myScore !== null">
+                <p>Congratulations, you finished in {{ getElapsedTime() | number: 2 }} seconds! What's your name?</p>
+                <input type="text" ng-model="name" focus-on="showHighScores"></input>
+            </span>
+
+            <h1>High scores</h1>
+            <div ng-if="highScores.length == 0">No one has played yet!</div>
+            <ol ng-if="highScores.length > 0">
+                <li ng-repeat="score in highScores" ng-class="{'myScore': score.$id == newHighScoreRef.name()}">
+                    {{ score.value | number:2 }} seconds - {{ score.name }}
+                </li>
+            </ol>
+
+            <input type="button" ng-click="play()" value="Play!" class="playButton"></input>
+        </div>
+    </div>
+    <div class="dialogBox" ng-show="showWelcomeScreen">
+        <div>
+            <h1>Welcome to the American History Game</h1>
+            <h3>The Classical Historian</h3>
+            <input type="button" ng-click="showWelcomeScreen = false; showHighScores = true;" value="View high scores" class="playButton"></input>
+            <input type="button" ng-click="play()" value="Play!" class="playButton"></input>
+        </div>
+    </div>
+</div>
+</body>
+</html>
