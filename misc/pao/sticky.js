@@ -267,7 +267,12 @@
       this.$table.find("th").each(function(i, th) {
           var $th = $(th);
           var $newHeader = $(newHeaders[i]);
-          var width = $th.width() + 1; // +1 for table borders --jfly
+          var width = $th.width();
+          var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+          if(is_chrome) {
+          // >>> kill ne now <<<
+              width += 1; // +1 for table borders --jfly
+          }
           $newHeader.css( {
              'max-width': width,
              'min-width': width,
