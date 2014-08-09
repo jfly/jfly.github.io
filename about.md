@@ -46,8 +46,8 @@ I got a TI-83+ for high school, and became fascinated with calculator games. I
 couldn't understand why my BASIC games ran so much slower than the amazing
 [Phoenix](http://www.ticalc.org/archives/files/fileinfo/148/14876.html). This
 led me to [United TI](unitedti.org) and [ticalc](ticalc.org), where I
-learned about assembly programming. With barely any programming experience, I
-struggled through a tutoral on Z80 assembly, and eventually completed
+learned about assembly programming. I struggled through a tutorial on Z80
+assembly, and eventually completed
 [The Poopsmith](http://www.ticalc.org/archives/files/fileinfo/317/31775.html).
 * 2007-2010:
 Developed [CCT](http://cct.cubing.net/) along with
