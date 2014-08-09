@@ -37,10 +37,18 @@ as a staff member and became US National Champion of one handed.
 At [Berkeley Spring 2013](https://www.worldcubeassociation.org/results/c.php?i=BerkeleySpring2013), I set the North American Record for one handed
 single with an 11.28 second solve.
 
-## Projects I'm particularly proud of
+### Projects I'm particularly proud of
 
 (in rougly chronological order)
 
+* 2003:
+I got a TI-83+ for high school, and became fascinated with calculator games. I
+couldn't understand why my BASIC games ran so much slower than the amazing
+[Phoenix](http://www.ticalc.org/archives/files/fileinfo/148/14876.html). This
+led me to [United TI](unitedti.org) and [ticalc](ticalc.org), where I
+learned about assembly programming. With barely any programming experience, I
+struggled through a tutoral on Z80 assembly, and eventually completed
+[The Poopsmith](http://www.ticalc.org/archives/files/fileinfo/317/31775.html).
 * 2007-2010:
 Developed [CCT](http://cct.cubing.net/) along with
 [Ryan Zheng](https://www.worldcubeassociation.org/results/p.php?i=2006ZHEN02),
@@ -81,4 +89,4 @@ I've also contributed to the [WCA workbook
 assistant](https://github.com/cubing/wca-workbook-assistant) and
 [twisty.js](https://github.com/cubing/twisty.js).
 
-## Thanks for stopping by!
+#### Thanks for stopping by!
