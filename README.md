@@ -1,1 +1,4 @@
-http://jflei.com works thanks to [free naked domain redirection](http://wwwizer.com/naked-domain-redirect)!
+https://github.com/poole/hyde
+http://aeqdev.com/tools/js/abigimage/
+
+bundle exec jekyll serve --watch

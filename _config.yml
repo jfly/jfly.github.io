@@ -1,0 +1,32 @@
+# Dependencies
+markdown:         kramdown
+highlighter:      pygments
+
+kramdown:
+  input: GFM
+  use_coderay: true
+  hard_wrap: false
+  coderay:
+    coderay_line_numbers: ''
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            jflei
+description:      "jfly.com was too expensive"
+url:              http://jflei.com
+baseurl:          /
+
+author:
+  name:           'Jeremy Fleischman'
+  url:            http://jflei.com
+
+# TODO - abigimage doesn't support more than one gallery, so we're ensuring
+# that only one post shows up at a time
+paginate:         1
+
+# Custom vars
+
+github:
+  repo:           https://github.com/poole/hyde
