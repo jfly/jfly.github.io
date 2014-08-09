@@ -1,1 +1,4 @@
 _site
+
+# vim stuff
+*.swp
