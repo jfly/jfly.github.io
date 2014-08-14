@@ -14,8 +14,7 @@ I particularly love to combine my
 [ways](https://www.youtube.com/watch?v=b8JOC1NkVP8), and
 [attempt to do stupid things](https://www.youtube.com/watch?v=AorkxGK2Qow).
 
-I graduated from San Clemente High School in 2006, and attended UC Berkeley
-from 2006 to 2010.
+I graduated from San Clemente High School in 2006, and UC Berkeley in 2010.
 
 [Dan Dzoan](https://www.worldcubeassociation.org/results/p.php?i=2006DZOA03)
 passed the presidency of the
