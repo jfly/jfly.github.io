@@ -1,3 +1,22 @@
 iframe.youtube {
-  max-width: 100%;
+    max-width: 100%;
+}
+
+html {
+    word-wrap: break-word; /* force the page to fit on a phone */
+}
+
+img {
+    border-radius: 0px; /* disable rounded images */
+}
+
+.sidebar {
+    background-image: url('/public/img/IMG_1532.JPG');
+    background-size: cover;
+    color: black;
+    text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
+}
+
+.sidebar a {
+    color: black;
 }
