@@ -38,7 +38,7 @@ and seeing a repeated wave form. I'd feared I'd see total chaos, or nothing.
 {% include image.html alt="A stackmat signal I recorded ages ago" src="dialup-stackmat/signal.jpg" %}
 
 After a long time staring at screenshots from Audacity, I was able to decode
-stackmat signals by hand (many years later, I learned that I was looking at the 
+stackmat signals by hand (many years later, I learned that I was looking at the
 the [RS-232](http://en.wikipedia.org/wiki/RS-232) standard).
 Friends, summer, and other projects kept me from writing a software signal
 decoder until my freshman year at Berkeley. I thank [Brian
@@ -46,7 +46,7 @@ Harvey](http://www.cs.berkeley.edu/~bh/)'s CS61A course for giving me the
 confidence to finally sit down and implement it. <<< NUKE? add as
 parenthetical? >>>
 
-I proudly showed my work to the Berkeley cubers after our 
+I proudly showed my work to the Berkeley cubers after our
 [first competition](https://www.worldcubeassociation.org/results/c.php?i=Berkeley2006).
 Conveniently, [Chris Hunt](https://www.worldcubeassociation.org/results/p.php?i=2005HUNT01), the
 creator of JNetCube, had driven down from Idaho and was present for my demo. As
@@ -100,11 +100,11 @@ distortion that had thwarted Dan Cohen.
 
 I'm a software guy. This signal filled me with a combination of dread and
 regret that I had not attended more of Professor Boser's 8am EE42 lectures. I
-needed a hardware guy to figure out what was going on. Fortunately, I work at a
+needed a hardware guy <<<gah so many guys>>> to figure out what was going on. Fortunately, I work at a
 hardware company. One day my coworker
 [Eithan Shavit](http://www.eithanshavit.com/) caught me looking at pictures of
 stackmat signals. As luck would have it, Eithan studied EE before getting a job in
-software. He was interested in the problem, and had some ideas for fixing it.
+software. He was interested in the problem, and had some ideas for fixing it. <<< the following explanation is all his or something?>>>
 
 Amazingly enough, phones are built to record human voice. Telephones are built
 to transmit frequencies between
@@ -152,38 +152,68 @@ And the resulting frequency analysis:
 
 {% include image.html src="dialup-stackmat/band-pass-filter-analysis.png" alt="300 Hz - 3400 Hz band pass filter frequency analysis" %}
 
-One day at work, Eithan
-eithan shavit comes in, we decide that the problem is due to frequencies
-outside of the frequency response curve of most phones
+This begs the question: how do you translate the stackmat signal into the range
+of frequencies that phones support? Turns out this problem (transmision of
+digital bits over a link designed for human voice) has already been solved. You
+use a modem!
 
-bought a modem!
-{% include image.html src="dialup-stackmat/2014-03-14 21.42.27.jpg" alt="DS8500 eval kit" %}
-{% include image.html src="dialup-stackmat/2014-03-18 22.20.40.jpg" alt="Eval kit wired up 1" %}
-{% include image.html src="dialup-stackmat/2014-03-18 23.35.38.jpg" alt="Eval kit wired up 2" %}
+The word modem is actually a portmanteau of the words modulator and
+demodulator. The original modems used a modulation scheme called
+[frequency-shift keying](http://en.wikipedia.org/wiki/Frequency-shift_keying)
+(FSK) that is surprisingly simple. Pick two distinct frequencies. Call one your
+mark frequency, it represents a binary 1. Call the other frequency your space
+frequency, it represents a binary 0. Whenever your digital signal is a 1, send
+the mark tone, and send the space tone for 0's.
 
-show the signal
+{% include image.html src="dialup-stackmat/fsk.jpg" alt="<a href='http://ironbark.xtelco.com.au/subjects/DC/lectures/7/fig_2010_07_05.jpg'>FSK</a> encoding of a digital signal" %}
 
-designed a board (copied and simplified http://datasheets.maximintegrated.com/en/ds/DS8500-KIT.pdf)
+Eithan did some research, and discovered the [DS8500 HART
+Modem](http://www.maximintegrated.com/en/products/interface/current-loop-products-4-20ma/DS8500.html).
+He convinced me to purchase an [evaluation
+kit](http://datasheets.maximintegrated.com/en/ds/DS8500-KIT.pdf).
+
+{% include image.html src="dialup-stackmat/2014-03-14 21.42.27.jpg" alt="Unboxing the DS8500 evaluation kit" %}
+{% include image.html src="dialup-stackmat/2014-03-18 23.35.38.jpg" alt="Wiring up the DS8500. This was confusing!" %}
+
+The modem FSK encoding the output of a generation 2 stackmat stopped at 0.00:
+
+{% include image.html src="dialup-stackmat/stackmat-fsk-gerty-nexus5-iphone3gs.png" alt="Output of the DS8500 as recorded by my desktop (gerty), a Nexus 5, and an iPhone 3Gs. The top row is the incoming digital signal, the output of a generation 2 stackmat stopped at 0.00." %}
+
+The signals recorded by the phones are still slightly distorted, but it's still
+easy to tell where the 0s are and where the 1s are. Having proven that the
+DS8500 actually does what we want it to, we designed our own board (Eagle CAD
+files available
+[here](https://github.com/jfly/fskube/tree/gh-pages/hardware/eagle)).
 
 {% include image.html src="dialup-stackmat/FSKube_files/board_top.png" alt="Top view" %}
 {% include image.html src="dialup-stackmat/FSKube_files/FSKube.brd.png" alt="Layout" %}
 {% include image.html src="dialup-stackmat/FSKube_files/FSKube.sch.png" alt="Schematic" %}
 
-<<< TODO - take a picture of the naked board
+We used [OSH Park](https://oshpark.com/) to print the board, which required us
+to order a minimum of three boards. Eithan wisely insisted that we purchase at
+least two of each component.
 
-got it printed, bought the components
+{% include image.html src="dialup-stackmat/2014-08-19 02.02.50.jpg" alt="A board fresh from OSH park" %}
 
-{% include image.html src="dialup-stackmat/2014-04-17 18.42.30.jpg" alt="wtf how do we solder this" %}
-{% include image.html src="dialup-stackmat/2014-04-17 15.59.37.jpg" alt="Components placed, not soldered" %}
+It wasn't until everything arrived that I realized just how small the DS8500 chip is. We had no idea how we were going to solder it to the board.
 
-coworker was able to solder it, burned 1 board
+{% include image.html src="dialup-stackmat/2014-04-17 18.42.30.jpg" alt="wtf could this be any tinier?" %}
 
-{% include image.html src="dialup-stackmat/IMG_20140422_162324.jpg" alt="Boards with DS8500" %}
+Fortunately, we found a coworker on the hardware team who does board work. Part
+of his job includes soldering
+[QFN](http://en.wikipedia.org/wiki/Quad_Flat_No-leads_package) packages. We
+gave him two boards and our two DS8500 chips. He attempted to solder the first
+one using a hot air gun, but the board cracked (he's used to working on Arista
+boards, which are upwards of seven layers, whereas our board is a mere two). He
+soldered the second chip by hand, which meant that he couldn't solder the
+"bellypad" (the large metal contact visible in the previous picture).
 
-we (eithan) soldered the rest of the components on
+{% include image.html src="dialup-stackmat/IMG_20140422_162324.jpg" alt="Boards with the DS8500 soldered on. Note that the lower right board is charred and cracked from the hot air treatment." %}
 
-{% include image.html src="dialup-stackmat/IMG_20140422_183302.jpg" alt="Eithan soldering" %}
-{% include image.html src="dialup-stackmat/IMG_20140422_190723.jpg" alt="Eithan soldering back of board" %}
+After that, it was a simple matter of letting Eithan do all the work.
+
+{% include image.html src="dialup-stackmat/IMG_20140422_183302.jpg" alt="Eithan soldering the through hole components." %}
+{% include image.html src="dialup-stackmat/IMG_20140422_190723.jpg" alt="Eithan soldering the back of the board." %}
 
 <<< show final board! >>>
 
