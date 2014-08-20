@@ -8,7 +8,7 @@ It started with a coincidence.
 Sometime after my [first Rubik's Cube
 competition](https://www.worldcubeassociation.org/results/c.php?i=CaltechSpring2005),
 I convinced my mom to buy me a stackmat, the timer used in speedcubing
-competitions. One of the first things I noticed about the stackmat was (is? >>>
+competitions. One of the first things I noticed about the stackmat was (is?
 <<<) that its output port is the exact same size at the i/o port of a TI-83+.
 
 This got me thinking, but first a short digression. (>>> better transition <<<)
@@ -21,7 +21,7 @@ something I *had* to try out. A vanilla TI-83+ and general lack of EE knowledge
 meant that I never actually got the project working, and my mom eventually made
 me move the mess into the garage.
 
-The upshot of all this is (was? >>>) that when my stackmat arrived, I already
+The upshot of all this is (was? <<<) that when my stackmat arrived, I already
 had the adapter and cables to plug it into my sound card's microphone jack.
 
 {% include image.html alt="My original stackmat and detritus from the abandoned TI-83+ PS/2 keyboard project" src="dialup-stackmat/stackmat.jpg" %}
@@ -215,21 +215,34 @@ After that, it was a simple matter of letting Eithan do all the work.
 {% include image.html src="dialup-stackmat/IMG_20140422_183302.jpg" alt="Eithan soldering the through hole components." %}
 {% include image.html src="dialup-stackmat/IMG_20140422_190723.jpg" alt="Eithan soldering the back of the board." %}
 
+Neither board worked at first. The board design called for an LED to indicate
+when the modem is turned on. The combination of modem and LED drew more power
+than our battery could supply. After removing the LED, the burnt board still
+didn't work, presumably because the modem had been damaged by the heat.
+
+This left us with one working board:
+
 <<< show final board! >>>
 
-i wrote a bunch of code to demodulate the signal (using zero crossing), it works, but probably could be improved on by someone who has actually studied DSP.
-the code is all written in c++ and is compiled to javascript. should be able to use the NDK to write an android app, and IOS should be able to run the c++ directly.
+With the hardware in hand, I wrote code to demodulate the FSK signal in
+software (see [jfly/fskube](https://github.com/jfly/fskube)). All the
+code is written in C++, and compiles to Javascript with
+[Emscripten](https://github.com/kripken/emscripten). This is what powers the
+web demo  at [http://www.jflei.com/fskube/](http://www.jflei.com/fskube/).
+Since the code is written in C++, it will be easy to develop IOS and Android
+apps without having to rewrite anything.
 
-## next steps?
+### Demo time!
 
-* mass production?
-* better design/case - output for display
-* integration with a competition results system...
-
-### thanks to everyone who supported me who i forgot to mention blah blah blah
-
->>>
-
-### Demo
-
+<<< TODO - record a better video with actual commentary >>>
 <iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/0M_GsnmY8Gs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+## Next steps
+
+* Test on more devices, especially iPhones.
+* Design a new board for mass production. If you happen to know anything about
+getting boards mass produced, please drop me a line! I'm very out of my element
+here.
+* Integration with a live results system for WCA competitions.
+
+Thanks for reading!
