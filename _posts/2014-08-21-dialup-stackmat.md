@@ -1,36 +1,42 @@
 ---
 layout: post
 title: Dialup Stackmat
+date: 2014-08-21
+hidden: true
 ---
 
-It started with a coincidence.
+It started with a coincidence: the
+[stackmat](http://www.speedstacks.com/store/retail/speed-stacks-stackmat-pro-timer/)
+and the
+[TI-83+](http://education.ti.com/en/us/products/calculators/graphing-calculators/ti-83-plus/features/features-summary)
+have the same 2.5mm communication port.
 
-Sometime after my [first Rubik's Cube
-competition](https://www.worldcubeassociation.org/results/c.php?i=CaltechSpring2005),
-I convinced my mom to buy me a stackmat, the timer used in speedcubing
-competitions. The first thing I noticed about the stackmat was (is?
-<<<) that its output port is the exact same size at the i/o port of a TI-83+.
+If you haven't heard of a stackmat, it's the timer used in Rubik's cube
+competitions. I first played with one at [Caltech Spring
+2005](https://www.worldcubeassociation.org/results/c.php?i=CaltechSpring2005).
+After the competition, I convinced my mom to buy me one.
 
-I was [very into calculator programming](about#ti) in high school. Outside of the
+Before I started speedcubing, I was
+[very into calculator programming](/about#ti). Outside of the
 time I spent using my beloved TI-83+ to do actual math, I spent hundreds of
-hours and untold AAA batteries programming on that cramped keyboard.
-I learned that some people had managed to [wire a PS/2 keyboard to
-their calculators](http://www.radicalsoft.org/hardware/keyboard/), and it was
-something I *had* to try out. I bought all the components needed for the
+hours and untold AAA batteries programming on that overpriced device with its
+cramped keyboard. When I learned that some people had managed to
+[wire a PS/2 keyboard to their calculators](http://www.radicalsoft.org/hardware/keyboard/),
+it was something I *had* to try out. I bought all the components needed for the
 project, but a general lack of EE knowledge
 meant that I never actually got the project working, and my mom eventually made
-me move the mess into the garage.
+me move the mess into our garage.
 
 The upshot of all this is (was? <<<) that when my stackmat arrived, I already
-had the adapter and cables to plug it into my computer via the microphone jack.
+had the adapter and cables to plug my stackmat into my computer via the
+microphone jack.
 
 {% include image.html alt="My original stackmat and detritus from the abandoned TI-83+ PS/2 keyboard project" src="dialup-stackmat/stackmat.jpg" %}
 
 I wanted to practice with my new stackmat, but I also wanted to keep track of
-my times, and I didn't want to manually enter them into my computer. I scoured
+my times without manually entering them into my computer. I scoured
 the internet for a program to interpret the sound of my stackmat.
-To my great surprise, it appeared that nobody had ever tried plugging their stackmat
-into a computer via the sound card! To this day, I believe I was the first
+To my great surprise, I couldn't find any! To this day, I believe I was the first
 person to try this.
 
 I graduated from high school in 2006, and spent some time that summer deciphering
@@ -44,8 +50,8 @@ stackmat signals by hand (many years later, I learned that I had reverse enginee
 the [RS-232](http://en.wikipedia.org/wiki/RS-232) standard).
 Friends and other projects kept me from writing a software signal
 interpreter that summer. It wasn't until I had settled into my freshman year of
-college that I finally sat down and coded up a truly awful, barely working
-interpreter in Java.
+college that I finally sat down and coded a truly awful, barely working
+stackmat interpreter in Java.
 
 I kept this project secret, confiding only in [Darren
 Kwong](https://www.worldcubeassociation.org/results/p.php?i=2005KWON01).
@@ -251,4 +257,4 @@ getting boards mass produced, please drop me a line! I'm very out of my element
 here.
 * Integration with a live results system for WCA competitions.
 
-Thanks for reading!
+Thanks for reading! <<< more bland, please

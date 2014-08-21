@@ -40,9 +40,8 @@ single with an 11.28 second solve.
 
 (in rougly chronological order)
 
-<a name="ti">
 * 2003:
-</a>
+<a name="ti"></a>
 I got a TI-83+ for high school, and became fascinated with calculator games. I
 couldn't understand why the games I wrote in TI-BASIC ran so much slower than the amazing
 [Phoenix](http://www.ticalc.org/archives/files/fileinfo/148/14876.html). This
