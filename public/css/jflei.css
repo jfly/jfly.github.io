@@ -8,6 +8,9 @@ html {
 
 img {
     border-radius: 0px; /* disable rounded images */
+    margin-left: auto; /* center image on page */
+    margin-right: auto;
+    margin-bottom: 0; /* disable bottom padding to make room for image-description */
 }
 
 .sidebar {
@@ -19,4 +22,10 @@ img {
 
 .sidebar a {
     color: black;
+}
+
+.image-description {
+    font-size: 0.75em;
+    text-align: center;
+    padding-bottom: 10px;
 }
