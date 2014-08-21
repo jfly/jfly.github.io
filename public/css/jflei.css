@@ -29,3 +29,7 @@ img {
     text-align: center;
     padding-bottom: 10px;
 }
+
+.hidden-post {
+    color: red;
+}
