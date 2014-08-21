@@ -101,24 +101,29 @@ stackmat to phone interpreter. I was joined by
 [Kevin Jorgensen](https://www.worldcubeassociation.org/results/p.php?i=2006JORG01),
 [Darren Kwong](https://www.worldcubeassociation.org/results/p.php?i=2005KWON01),
 and [Devin Corr-Robinett](https://www.worldcubeassociation.org/results/p.php?i=2006CORR01).
-After a few hours, we gave up when we ran into the same
-distortion that had thwarted Dan Cohen.
+After a few hours, we ran into the distortion that had thwarted Dan Cohen.
 
 {% include image.html src="dialup-stackmat/dan-cohen-signals.png" alt="Distorted iPhone signal" %}
 
 I'm a software guy. This signal filled me with a combination of dread and
-regret that I had not attended more of Professor Boser's 8am EE42 lectures.
-Fortunately, I work at a hardware company. One day my coworker
+regret that I had not attended more of Professor Boser's 8am EE42 lectures. (<<<>>>word grouping is weird)
+Unable to proceed without a better understanding of what was going on, we gave up.
+
+It wasn't until January 2014 that I revisted the problem. While distracted at work, my coworker
 [Eithan Shavit](http://www.eithanshavit.com/) caught me looking at pictures of
-stackmat signals. As luck would have it, Eithan studied EE before getting a job in
-software. He was interested in the problem, and had some ideas for fixing it. <<< the following explanation is all his or something?>>>
+stackmat signals. As luck would have it, Eithan studied Electrical Engineering
+before getting a job in software. He was interested in the distorted signal, and had
+some ideas for fixing it.
+
+<<< there is a change in the narration here. we go from story mode to "lecturing" mode, is there a better way to transition?>>>
 
 Amazingly enough, phones are designed to record human voice. Human speech contains
 a large range of frequencies, but you only need to listen to a small
 range of those frequencies to understand what somebody is saying. That range of
-frequencies is approximately [300 Hz to 3400
-Hz](http://en.wikipedia.org/wiki/Voice_frequency). Phones aren't necessarily
-built to record frequencies outside of that range.
+frequencies is approximately
+[300 Hz to 3400 Hz](http://en.wikipedia.org/wiki/Voice_frequency).
+Phones can drop frequencies outside of that range if they want to, but they
+*must* preserve all frequencies within that range.
 
 The digital data that comes out of a stackmat looks nothing like human voice.
 To conceptualize what a phone does when it receives the square waves of the
@@ -130,7 +135,7 @@ Wikipedia has already done this for us.
 {% include image.html src="dialup-stackmat/Squarewave01CJC.png" alt='Components of a square wave. From <a href=\'http://en.wikipedia.org/wiki/File:Squarewave01CJC.png\'>http://en.wikipedia.org/wiki/File:Squarewave01CJC.png</a>' %}
 
 To approximate the square wave (in red), add together all the component sine
-waves. The low frequency blue wave builds most of the shape, and the high
+waves. The low frequency blue wave builds most of the shape, and the higher
 frequency waves serve to square out the corners. It's hard to imagine what
 removing the blue wave from the signal would look like, but it should be
 clear that without that low frequency component, our signal is going
@@ -140,14 +145,9 @@ To simulate the effect of sending a signal through a channel designed for
 speech, we want to remove frequencies outside of the range 300 Hz to 3400
 Hz. Audacity makes it easy to perform this experiment.
 
-The unfiltered signal:
-
 {% include image.html src="dialup-stackmat/no-filter.png" alt="Unfiltered stackmat signal" %}
 
-Frequency analysis of the stackmat signal (note the large quantity of low
-frequency signals:
-
-{% include image.html src="dialup-stackmat/no-filter-analysis.png" alt="Unfiltered stackmat signal frequency analysis" %}
+{% include image.html src="dialup-stackmat/no-filter-analysis.png" alt="Unfiltered stackmat signal frequency analysis. Note the bias towards low frequency signals." %}
 
 Now apply a band pass filter that removes all frequencies between 300 Hz and 3400 Hz. The resulting signal looks
 very similar to the distorted signal we saw when plugging the stackmat into a
@@ -155,14 +155,12 @@ phone:
 
 {% include image.html src="dialup-stackmat/band-pass-filter.png" alt="300 Hz - 3400 Hz band pass filter applied to stackmat signal" %}
 
-And the resulting frequency analysis:
-
-{% include image.html src="dialup-stackmat/band-pass-filter-analysis.png" alt="300 Hz - 3400 Hz band pass filter frequency analysis" %}
+{% include image.html src="dialup-stackmat/band-pass-filter-analysis.png" alt="300 Hz - 3400 Hz band pass filter frequency analysis. Note that a lot of the higher frequencies are gone, and the very lowest frequencies have dropped off." %}
 
 This begs the question: how do you translate the stackmat signal into a range
 of frequencies that phones do support? It turns out this problem (transmision of
 digital bits over a link designed for human voice) has already been solved.
-Use a modem!
+You use a modem!
 
 The word modem is actually a portmanteau of the words modulator and
 demodulator. The original modems used a modulation scheme called
@@ -180,15 +178,15 @@ He convinced me to purchase an
 [evaluation kit](http://datasheets.maximintegrated.com/en/ds/DS8500-KIT.pdf).
 
 {% include image.html src="dialup-stackmat/2014-03-14 21.42.27.jpg" alt="Unboxing the DS8500 evaluation kit" %}
-{% include image.html src="dialup-stackmat/2014-03-18 23.35.38.jpg" alt="Wiring up the DS8500. This was confusing!" %}
+{% include image.html src="dialup-stackmat/2014-03-18 23.35.38.jpg" alt="Wiring up the DS8500. This was tricky!" %}
 
 You can see a stackmat plugged into the modem above. I connected the output of
-the modem into my desktop, Nexus 5, and iPhone 3Gs and recorded the signals below:
+the modem into my desktop, Nexus 5, and iPhone 3Gs and recorded the incoming signal.
 
 {% include image.html src="dialup-stackmat/stackmat-fsk-gerty-nexus5-iphone3gs.png" alt="Output of the DS8500 as recorded by my desktop (gerty), a Nexus 5, and an iPhone 3Gs. The top row is the incoming digital signal, the output of a generation 2 stackmat stopped at 0.00." %}
 
 
-Success!! The signals recorded by the phones are slightly distorted (we're
+Success!!! The signals recorded by the phones are slightly distorted (we're
 still not sure why), but it's easy to tell where the 0s and 1s are.  Having
 proven that the DS8500 does what we want it to, we designed our own
 board (Eagle CAD files available
@@ -213,29 +211,32 @@ It wasn't until everything arrived that we realized just how small the DS8500 ch
 Fortunately, we found a coworker on the hardware team who does board work. Part
 of his job includes soldering these ridiculous
 [TQFN](http://en.wikipedia.org/wiki/Quad_Flat_No-leads_package) packages. We
-gave him two boards and two DS8500 chips. He attempted to solder the first
+gave him two of our boards and our two DS8500 chips. He attempted to solder the first
 one using a hot air gun, but the board cracked (our two layer board is a lot
 thinner than the boards he is used to working with). He
 soldered the second chip by hand, which meant that he couldn't solder the
-"bellypad" (the large metal contact visible in the previous picture).
+"bellypad" (the large metal contact visible in the previous picture). Since the
+bellybad is labelled as a ground, and many of the contacts on the outside of
+the chip are also labelled as ground, we hoped that just soldering the outside
+would be good enough.
 
 {% include image.html src="dialup-stackmat/IMG_20140422_162324.jpg" alt="Boards with the DS8500 soldered on. Note that the lower right board is charred and cracked from the hot air treatment." %}
 
 After that, it was a simple matter of letting Eithan do all the work.
 
 {% include image.html src="dialup-stackmat/IMG_20140422_183302.jpg" alt="Eithan soldering the through hole components." %}
-{% include image.html src="dialup-stackmat/IMG_20140422_190723.jpg" alt="Eithan soldering the back of the board." %}
+{% include image.html src="dialup-stackmat/IMG_20140422_190723.jpg" alt="Military precision" %}
 
 Neither board worked at first. The board design called for an LED to indicate
 when the modem is turned on. The combination of modem and LED drew more power
 than our battery could supply. After removing the LED, the burnt board still
 didn't work, presumably because the modem had been damaged by the heat.
 
-This left us with one working board:
+This left us with one working board.
 
 <<< show final board! >>>
 
-With the hardware in hand, I wrote code to demodulate the FSK signal
+With our custom board in hand, I wrote code to demodulate the FSK signal
 (see [jfly/fskube](https://github.com/jfly/fskube)). All that
 code is written in C++, and compiles to Javascript with
 [Emscripten](https://github.com/kripken/emscripten). This is what powers the
@@ -243,7 +244,10 @@ web demo  at [http://www.jflei.com/fskube/](http://www.jflei.com/fskube/).
 Since the code is written in C++, it will be easy to develop iOS and Android
 apps without having to rewrite anything.
 
-### Demo!
+I hope that someday soon, we'll be able to run Rubik's cube competitions with
+truly live results.
+
+### Demo
 
 <<< TODO - record a better video with actual commentary >>>
 
@@ -256,5 +260,3 @@ apps without having to rewrite anything.
 getting boards mass produced, please drop me a line! I'm very out of my element
 here.
 * Integration with a live results system for WCA competitions.
-
-Thanks for reading! <<< more bland, please
