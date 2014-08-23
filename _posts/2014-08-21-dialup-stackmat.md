@@ -41,7 +41,7 @@ person to try this.
 
 I graduated from high school in 2006, and spent some time that summer deciphering
 the stackmat protocol. I'll never forget the thrill of zooming into a recording
-and seeing a repeated wave form.
+and seeing a repeated waveform.
 
 {% include image.html alt="A stackmat signal I recorded ages ago" src="dialup-stackmat/signal.jpg" %}
 
@@ -74,7 +74,7 @@ piece of software that other people use.
 
 I'm sure I would have become a contributor to JNetCube if not for Ryan Zheng.
 Ryan wanted to see my awful code, and then felt compelled to improve it.
-He eventually pulled out his own laptop, and we decended into a full night of hacking.
+He eventually pulled out his own laptop, and we descended into a full night of hacking.
 That night lengthened into a full weekend. At one
 point, Ryan suggested the unthinkable: rather than just giving this feature to
 JNetCube, we could build our own superior timer! That moment was the birth of
@@ -96,6 +96,8 @@ wrote a stackmat interpreter in Objective-C in July 2010. He got it working in
 the iPhone simulator on his computer, but when he loaded it onto his
 phone, it just didn't work. The signal he recorded was so distorted as to be unreadable.
 
+{% include image.html src="dialup-stackmat/dan-cohen-signals.png" alt="Dan Cohen's distorted signal" %}
+
 In February 2012, I attended a hackathon at Berkeley with the intent of writing a
 stackmat to phone interpreter. I was joined by
 [Kevin Jorgensen](https://www.worldcubeassociation.org/results/p.php?i=2006JORG01),
@@ -103,19 +105,18 @@ stackmat to phone interpreter. I was joined by
 and [Devin Corr-Robinett](https://www.worldcubeassociation.org/results/p.php?i=2006CORR01).
 After a few hours, we ran into the distortion that had thwarted Dan Cohen.
 
-{% include image.html src="dialup-stackmat/dan-cohen-signals.png" alt="Distorted iPhone signal" %}
+{% include image.html src="dialup-stackmat/1.15_iphone3gs.png" alt="Distorted signal on an iPhone 3Gs" %}
 
 I'm a software guy. This signal filled me with a combination of dread and
-regret that I had not attended more of Professor Boser's 8am EE42 lectures. (<<<>>>word grouping is weird)
+regret that I had not attended more of Professor Boser's 8am EE42 lectures.
 Unable to proceed without a better understanding of what was going on, we gave up.
 
-It wasn't until January 2014 that I revisted the problem. While distracted at work, my coworker
+It wasn't until January 2014 that I revisited the problem. One day at work, my
+coworker
 [Eithan Shavit](http://www.eithanshavit.com/) caught me looking at pictures of
 stackmat signals. As luck would have it, Eithan studied Electrical Engineering
-before getting a job in software. He was interested in the distorted signal, and had
-some ideas for fixing it.
-
-<<< there is a change in the narration here. we go from story mode to "lecturing" mode, is there a better way to transition?>>>
+before getting a job in software. He was interested in the distorted signal, and
+was able to shed some light on what was going on.
 
 Amazingly enough, phones are designed to record human voice. Human speech contains
 a large range of frequencies, but you only need to listen to a small
@@ -149,16 +150,20 @@ Hz. Audacity makes it easy to perform this experiment.
 
 {% include image.html src="dialup-stackmat/no-filter-analysis.png" alt="Unfiltered stackmat signal frequency analysis. Note the bias towards low frequency signals." %}
 
-Now apply a band pass filter that removes all frequencies between 300 Hz and 3400 Hz. The resulting signal looks
-very similar to the distorted signal we saw when plugging the stackmat into a
-phone:
+Now apply a band pass filter that attenuates all frequencies between 300 Hz and
+3400 Hz. Note that we're not harshly cutting off all frequencies outside of
+this range, they are dampened instead. This is a reasonable approximation of
+what happens in the real world: devices gradually lose sensitivity to
+frequencies outside of their operating range, rather than dropping off entirely.
+The resulting signal looks very similar to the distorted signal we saw when
+plugging the stackmat into a phone!
 
 {% include image.html src="dialup-stackmat/band-pass-filter.png" alt="300 Hz - 3400 Hz band pass filter applied to stackmat signal" %}
 
 {% include image.html src="dialup-stackmat/band-pass-filter-analysis.png" alt="300 Hz - 3400 Hz band pass filter frequency analysis. Note that a lot of the higher frequencies are gone, and the very lowest frequencies have dropped off." %}
 
 This begs the question: how do you translate the stackmat signal into a range
-of frequencies that phones do support? It turns out this problem (transmision of
+of frequencies that phones do support? It turns out this problem (transmission of
 digital bits over a link designed for human voice) has already been solved.
 You use a modem!
 
@@ -169,13 +174,36 @@ demodulator. The original modems used a modulation scheme called
 mark frequency, it represents a binary 1. Call the other your space
 frequency, it represents a binary 0. Whenever your digital signal is a 1, send
 the mark tone, and whenever your digital signal is a 0, send the space tone.
+If the mark and space frequencies you chose are within the range of frequencies
+that phones support, you're golden.
 
 {% include image.html src="dialup-stackmat/fsk.jpg" alt="<a href='http://ironbark.xtelco.com.au/subjects/DC/lectures/7/fig_2010_07_05.jpg'>FSK</a> encoding of a digital signal" %}
 
 Eithan did some research, and discovered the
 [DS8500 HART Modem](http://www.maximintegrated.com/en/products/interface/current-loop-products-4-20ma/DS8500.html).
-He convinced me to purchase an
-[evaluation kit](http://datasheets.maximintegrated.com/en/ds/DS8500-KIT.pdf).
+It produces frequencies of 1200 Hz and 2200 Hz, perfect for a phone.
+I was very skeptical that it would be able to speak the digital signal
+stackmats produce, but measurements of the stackmat's digital output voltage
+were exactly the voltages the
+[DS8500 data sheet](http://datasheets.maximintegrated.com/en/ds/DS8500.pdf)
+asks for. The chip is only $12, why not give it a shot?
+
+Unfortunately, using chips is not as simple as plug and play. Among other
+things, the DS8500 requires an input signal of 3.6864 MHz.
+Easy, run a current over a piece of quartz, and then filter the output of
+that through some capacitors. Also resistors. Apparently you need resistors
+everywhere (I'm convinced that resistors don't actually do anything other than
+cost a few pennies and look cool). This was quickly getting out of hand.
+
+Suffice to say, reading the DS8500 data sheet
+and distilling that information into a working board requires a degree in EE.
+Eithan could do it, but he wasn't sure he could get it right the first time.
+Fortunately, you can purchase an
+[evaluation kit](http://datasheets.maximintegrated.com/en/ds/DS8500-KIT.pdf)
+that has all the necessary components soldered to a DS8500 for you. For $46.86
+after tax, the evaluation kit is a rip off (all the components on the board cost
+pennies, and the chip costs ~$12), but it let us verify the chip without
+the time and risk of designing and soldering our own board.
 
 {% include image.html src="dialup-stackmat/2014-03-14 21.42.27.jpg" alt="Unboxing the DS8500 evaluation kit" %}
 {% include image.html src="dialup-stackmat/2014-03-18 23.35.38.jpg" alt="Wiring up the DS8500. This was tricky!" %}
@@ -188,7 +216,7 @@ the modem into my desktop, Nexus 5, and iPhone 3Gs and recorded the incoming sig
 
 Success!!! The signals recorded by the phones are slightly distorted (we're
 still not sure why), but it's easy to tell where the 0s and 1s are.  Having
-proven that the DS8500 does what we want it to, we designed our own
+proven that the DS8500 does what we want it to, it was time to design our own board
 board (Eagle CAD files available
 [here](https://github.com/jfly/fskube/tree/gh-pages/hardware/eagle)).
 
@@ -216,7 +244,7 @@ one using a hot air gun, but the board cracked (our two layer board is a lot
 thinner than the boards he is used to working with). He
 soldered the second chip by hand, which meant that he couldn't solder the
 "bellypad" (the large metal contact visible in the previous picture). Since the
-bellybad is labelled as a ground, and many of the contacts on the outside of
+bellypad is labelled as a ground, and many of the contacts on the outside of
 the chip are also labelled as ground, we hoped that just soldering the outside
 would be good enough.
 
