@@ -6,7 +6,7 @@ IFS=$(echo -en "\n\b")
 IMGS_RE=".*\.\(jpg\|gif\|png\|jpeg\)"
 
 if [ -d "public/img/original" ]; then
-    for originalFile in `find public/img/original -regex "$IMGS_RE"`; do
+    for originalFile in `find public/img/original -iregex "$IMGS_RE"`; do
         # resize original images to a maximum size of 1024x1024 (full)
         fullFile=$(echo $originalFile | sed 's|public/img/original|public/img/full|g')
 
@@ -19,7 +19,7 @@ if [ -d "public/img/original" ]; then
     done
 fi
 
-for fullFile in `find public/img/full -regex "$IMGS_RE"`; do
+for fullFile in `find public/img/full -iregex "$IMGS_RE"`; do
     # resize full images to a maximum size of 400x400 (thumbs)
     thumbsFile=$(echo $fullFile | sed 's|public/img/full|public/img/thumbs|g')
 
