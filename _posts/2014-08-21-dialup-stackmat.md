@@ -230,9 +230,7 @@ least two of each component. Everything for one board cost $26 (see our [bill of
 materials](https://docs.google.com/spreadsheets/d/1-2u8-NUTNEA3l2xFZdgK0my_7DUBfUnJsI4Eo2_YHuk/edit?usp=sharing)).
 If we move onto mass production, the price should go down significantly.
 
-<<< TODO take a better picture, this one is shit >>>
-
-{% include image.html src="dialup-stackmat/2014-08-19 02.02.50.jpg" alt="A board fresh from OSH park" %}
+{% include image.html src="dialup-stackmat/board-fresh-from-osh-park.jpg" alt="A board fresh from OSH park" %}
 
 It wasn't until everything arrived that we realized just how small the DS8500 chip is. We had no idea how we were going to solder it to the board.
 
@@ -264,7 +262,7 @@ didn't work, presumably because the modem had been damaged by the heat.
 
 This left us with one working board.
 
-<<< show final board! >>>
+{% include image.html src="dialup-stackmat/finished-board.jpg" alt="The finished board." %}
 
 With our custom board in hand, I wrote code to demodulate the FSK signal
 (see [jfly/fskube](https://github.com/jfly/fskube)). All that
