@@ -226,7 +226,9 @@ board (Eagle CAD files available
 
 We used [OSH Park](https://oshpark.com/) to print the board, which required us
 to order a minimum of three boards. Eithan wisely insisted that we purchase at
-least two of each component (<<< link to BOM? include price estimate here).
+least two of each component. Everything for one board cost $26 (see our [bill of
+materials](https://docs.google.com/spreadsheets/d/1-2u8-NUTNEA3l2xFZdgK0my_7DUBfUnJsI4Eo2_YHuk/edit?usp=sharing)).
+If we move onto mass production, the price should go down significantly.
 
 <<< TODO take a better picture, this one is shit >>>
 
