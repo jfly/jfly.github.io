@@ -79,6 +79,11 @@ That night lengthened into a full weekend. At one
 point, Ryan suggested the unthinkable: rather than just giving this feature to
 JNetCube, we could build our own superior timer! That moment was the birth of
 [C.A.L. Cube Timer (CCT)](http://cct.cubing.net/).
+CCT received a lot of attention from the cubing community, and we worked for
+years to keep up with the requests. Many features that were first introduced in
+CCT live on in the the myriad cube timers we have today. My proudest moment was
+when I saw videos posted by Chinese cubers using the Chinese translation of
+CCT.
 
 Since the beginning, there was talk of incorporating CCT into Rubik's Cube
 competitions. Such talk could never get past the fact that
