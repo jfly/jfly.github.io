@@ -5,96 +5,54 @@ date: 2014-08-21
 hidden: true
 ---
 
-It started with a coincidence: the
-[stackmat](http://www.speedstacks.com/store/retail/speed-stacks-stackmat-pro-timer/)
-and the
-[TI-83+](http://education.ti.com/en/us/products/calculators/graphing-calculators/ti-83-plus/features/features-summary)
-have the same 2.5mm communication port.
+For those of you who have never been to a Rubik's Cube competition, they are
+controlled chaos. It goes something like this:
 
-If you haven't heard of a stackmat, it's the timer used in Rubik's cube
-competitions. I first played with one at [Caltech Spring
-2005](https://www.worldcubeassociation.org/results/c.php?i=CaltechSpring2005).
-After the competition, I convinced my mom to buy me one.
+1. A competitor is called to bring up his solved cube and place it on a blank
+   scorecard.
+2. A scrambler scrambles that cube, using the scorecard to determine which
+   scramble to give the competitor.
+3. A runner carries that scrambled cube to a timing station along with the scorecard.
+4. At the timing station, a judge performs the judging ritual
+prescribed in the
+[WCA regulations](https://www.worldcubeassociation.org/regulations/#A3).
+5. The judge writes the competitor's solve time on the scorecard.
+   Both the judge and the competitor sign the sheet.
+6. A runner carries the competitor's scorecard and solved cube back to the
+   scrambling station.
+7. Repeat steps 2-6 until the competitor has done all of his solves.
+8. The completed scorecard is given to a staff member whose sole job is to
+   manually enter all the times into a computer.
 
-Before I started speedcubing, I was
-[very into calculator programming](/about#ti). Outside of the
-time I spent using my beloved TI-83+ to do actual math, I spent hundreds of
-hours and untold AAA batteries programming on that overpriced device with its
-cramped keyboard. When I learned that some people had managed to
-[wire a PS/2 keyboard to their calculators](http://www.radicalsoft.org/hardware/keyboard/),
-it was something I *had* to try out. I bought all the components needed for the
-project, but a general lack of EE knowledge
-meant that I never actually got the project working, and my mom eventually made
-me move the mess into our garage.
+Data entry is a mindnumbing, error prone job.
+[C.A.L. Cube Timer (CCT)]({% post_url 2014-08-20-cct %}) leveraged the
+stackmat's display port to plug stackmats into computers. Why not do the same
+thing to automate data entry at competitions?
 
-The upshot of all this is (was? <<<) that when my stackmat arrived, I already
-had the adapter and cables to plug my stackmat into my computer via the
-microphone jack.
+As a matter of fact, this has been done. All the way back in 2012, the Polish built a
+custom piece of hardware to interface with the stackmat and provide live
+results at a competition. The project is called
+[opencubeware](https://www.facebook.com/opencubeware). Unfortunately, there
+isn't much information about it on the facebook group, and their website
+[www.opencubeware.org](http://www.opencubeware.org/) is currently a
+blank page.
 
-{% include image.html alt="My original stackmat and detritus from the abandoned TI-83+ PS/2 keyboard project" src="dialup-stackmat/stackmat.jpg" %}
+How do they handle multiple ongoing rounds? What
+device aggregates the results from all the devices? What form of wireless do
+they use to communicate with that box? What's security like? It looks like
+they're battery powered, how long do they last on battery? How do you program the id cards? Most importantly, how much does everything cost?
 
-I wanted to practice with my new stackmat, but I also wanted to keep track of
-my times without manually entering them into my computer. I scoured
-the internet for a program to interpret the sound of my stackmat.
-To my great surprise, I couldn't find any! To this day, I believe I was the first
-person to try this.
+Opencubeware is a truly impressive feat of engineering, but I'm convinced it's
+not the right direction for us to go. The devices appear to be wireless, and there's no discussion of security. It's also unclear how you handle multiple ongoing rounds with the minimal ui. Today, smartphones are ubiquitous and *cheap*.
+I believe we can build a more secure, reliable, easy to use results system on
+commodity cell phones than we could ever acheive by building our own custom device.
+It's easier to create an android app than it is to write firmware for a
+microcontroller. Furthermore, touch screens allow for a better, more flexible
+ui, and phones already have Wi-Fi, cameras, and some even support NFC.
 
-I graduated from high school in 2006, and spent some time that summer deciphering
-the stackmat protocol. I'll never forget the thrill of zooming into a recording
-and seeing a repeated waveform.
-
-{% include image.html alt="A stackmat signal I recorded ages ago" src="dialup-stackmat/signal.jpg" %}
-
-After a long time staring at screenshots from Audacity, I was able to decode
-stackmat signals by hand (many years later, I learned that I had reverse engineered
-the [RS-232](http://en.wikipedia.org/wiki/RS-232) standard).
-Friends and other projects kept me from writing a software signal
-interpreter that summer. It wasn't until I had settled into my freshman year of
-college that I finally sat down and coded a truly awful, barely working
-stackmat interpreter in Java.
-
-I kept this project secret, confiding only in [Darren
-Kwong](https://www.worldcubeassociation.org/results/p.php?i=2005KWON01).
-I decided to demonstrate my work at Berkeley's first Rubik's Cube competition,
-[Berkeley Fall 2006](https://www.worldcubeassociation.org/results/c.php?i=Berkeley2006).
-Of course, that didn't happen. I had never staffed a
-competition before, but there's rarely a moment of free time. Berkeley's first
-competition was no exception. Fortunately, we
-all met up at
-[Dan Dzoan](https://www.worldcubeassociation.org/results/p.php?i=2006DZOA03)'s
-apartment afterwards, and I was able to show off my hard work.
-I like to think that people were impressed and excited about my work, but I honestly only remember the reactions of two people:
-[Chris Hunt](https://www.worldcubeassociation.org/results/p.php?i=2005HUNT01),
-and [Ryan Zheng](https://www.worldcubeassociation.org/results/p.php?i=2006ZHEN02).
-
-Chris Hunt is <<<was?>>> the creator of the legendary JNetCube. At the time,
-almost every cuber I knew used JNetCube. He proposed adding my stackmat support to
-it, and I remember being honored by the opportunity to contribute to a real
-piece of software that other people use.
-
-I'm sure I would have become a contributor to JNetCube if not for Ryan Zheng.
-Ryan wanted to see my awful code, and then felt compelled to improve it.
-He eventually pulled out his own laptop, and we descended into a full night of hacking.
-That night lengthened into a full weekend. At one
-point, Ryan suggested the unthinkable: rather than just giving this feature to
-JNetCube, we could build our own superior timer! That moment was the birth of
-[C.A.L. Cube Timer (CCT)](http://cct.cubing.net/).
-CCT received a lot of attention from the cubing community, and we worked for
-years to keep up with the requests. Many features that were first introduced in
-CCT live on in the the myriad cube timers we have today. My proudest moment was
-when I saw videos posted by Chinese cubers using the Chinese translation of
-CCT.
-
-Since the beginning, there was talk of incorporating CCT into Rubik's Cube
-competitions. Such talk could never get past the fact that
-you would need a computer at every single judging station, an organizational
-nightmare. However, in recent years, smartphones have become
-so ubiquitous that I believe it is time for this dream to become a reality.
-Companies like [Square](https://squareup.com/) have proven that it is feasible
-to plug a device into the headset jack of a smartphone and run a business.
-There is no reason not to do the same at cube competitions! Why hasn't this
-already been done? Unfortunately, it turns out that plugging a stackmat into a
-phone isn't as straightforward as plugging a stackmat into a computer.
+Why hasn't this already been done? Unfortunately, it turns out that plugging a
+stackmat into a phone isn't as straightforward as plugging a stackmat into a
+computer (as CCT did).
 
 [Dan Cohen](https://www.worldcubeassociation.org/results/p.php?i=2007COHE01)
 wrote a stackmat interpreter in Objective-C in July 2010. He got it working in
@@ -277,14 +235,17 @@ web demo  at [http://www.jflei.com/fskube/](http://www.jflei.com/fskube/).
 Since the code is written in C++, it will be easy to develop iOS and Android
 apps without having to rewrite anything.
 
-I hope that someday soon, we'll be able to run Rubik's cube competitions with
-truly live results.
-
 ### Demo
 
 <<< TODO - record a better video with actual commentary >>>
 
 <iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/0M_GsnmY8Gs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+This is just the beginning. There is a lot of work to do before we can
+run a competition with our phones. I aim to start running small practice
+competitions with the Berkeley Cube Club in early 2015. I intend to see this
+project though until it can be used at a large scale competition such as US
+Nationals or Worlds.
 
 ## Next steps
 

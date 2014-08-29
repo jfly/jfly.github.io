@@ -75,6 +75,7 @@ each won $20 to Cheeseboard =). See [Kevin's writeup of the
 event](http://spacestation77.wordpress.com/2010/02/07/berkeley-hackathon-2010/)
 and [Peter's rewrite from scratch](https://github.com/peterbat/rubikon).
 * 2010:
+<a name="tnoodle"></a>
 After finding myself occasionally using [qqtimer](http://www.qqtimer.net/),
 I finally admitted to myself that webapps are generally easier to use than
 desktop apps. I abandonded CCT, and starting writing a webtimer (which eventually became [TNT](http://www.jflei.com/tnt/)). Too
