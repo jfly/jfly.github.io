@@ -24,7 +24,7 @@ prescribed in the
 8. The completed scorecard is given to a staff member whose sole job is to
    manually enter all the times into a computer.
 
-Data entry is a mindnumbing, error prone job.
+Data entry is a mind numbing, error prone job.
 [C.A.L. Cube Timer (CCT)]({% post_url 2014-08-20-cct %}) leveraged the
 stackmat's display port to plug stackmats into computers. Why not do the same
 thing to automate data entry at competitions?
@@ -237,9 +237,7 @@ apps without having to rewrite anything.
 
 ### Demo
 
-<<< TODO - record a better video with actual commentary >>>
-
-<iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/0M_GsnmY8Gs?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/ZFWurXR_X2I?rel=0" frameborder="0" allowfullscreen></iframe>
 
 This is just the beginning. There is a lot of work to do before we can
 run a competition with our phones. I aim to start running small practice
