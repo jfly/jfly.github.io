@@ -29,7 +29,7 @@ Data entry is a mind numbing, error prone job.
 stackmat's display port to plug stackmats into computers. Why not do the same
 thing to automate data entry at competitions?
 
-As a matter of fact, this has been done. All the way back in 2012, the Polish built a
+As a matter of fact, this has been done. All the way back in 2012, a group of Polish programmers built a
 custom piece of hardware to interface with the stackmat and provide live
 results at a competition. The project is called
 [opencubeware](https://www.facebook.com/opencubeware). Unfortunately, there
@@ -45,10 +45,10 @@ they're battery powered, how long do they last on battery? How do you program th
 Opencubeware is a truly impressive feat of engineering, but I'm convinced it's
 not the right direction for us to go. The devices appear to be wireless, and there's no discussion of security. It's also unclear how you handle multiple ongoing rounds with the minimal ui. Today, smartphones are ubiquitous and *cheap*.
 I believe we can build a more secure, reliable, easy to use results system on
-commodity cell phones than we could ever acheive by building our own custom device.
+commodity cell phones than we could ever achieve by building our own custom device.
 It's easier to create an android app than it is to write firmware for a
 microcontroller. Furthermore, touch screens allow for a better, more flexible
-ui, and phones already have Wi-Fi, cameras, and some even support NFC.
+user interface, and phones already have Wi-Fi, cameras, and some even support NFC.
 
 Why hasn't this already been done? Unfortunately, it turns out that plugging a
 stackmat into a phone isn't as straightforward as plugging a stackmat into a
@@ -89,7 +89,7 @@ frequencies is approximately
 Phones can drop frequencies outside of that range if they want to, but they
 *must* preserve all frequencies within that range.
 
-The digital data that comes out of a stackmat looks nothing like human voice.
+Unfortunately, the digital data that comes out of a stackmat looks nothing like human voice.
 To conceptualize what a phone does when it receives the square waves of the
 stackmat signal, it is necessary to visualize the square wave in terms of its
 component frequencies. This exercise is known as [Fourier
@@ -179,7 +179,7 @@ the modem into my desktop, Nexus 5, and iPhone 3Gs and recorded the incoming sig
 
 Success!!! The signals recorded by the phones are slightly distorted (we're
 still not sure why), but it's easy to tell where the 0s and 1s are.  Having
-proven that the DS8500 does what we want it to, it was time to design our own board
+proven that the DS8500 does what we want it to, it was time to design our own
 board (Eagle CAD files available
 [here](https://github.com/jfly/fskube/tree/gh-pages/hardware/eagle)).
 
