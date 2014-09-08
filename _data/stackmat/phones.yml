@@ -1,0 +1,81 @@
+- phone: Asus Fonepad K004
+  id: asus_k004
+  url: http://www.gsmchoice.com/en/catalogue/asus/fonepadk004/Asus-Fonepad-K004.html
+  owner: ???
+
+- phone: Asus Zenfone
+  id: asus_zenfone
+  url: http://en.wikipedia.org/wiki/Asus_ZenFone
+  owner: Benjamin Chu
+
+- phone: Galaxy Nexus
+  id: galaxy_nexus
+  url: http://en.wikipedia.org/wiki/Galaxy_Nexus
+  owner: Jeremy Fleischman
+  works: true
+
+- phone: iPhone 3GS
+  id: iphone_3gs
+  url: http://en.wikipedia.org/wiki/IPhone_3GS
+  owner: Kevin Heiken
+
+- phone: Motorola Droid 1
+  id: motorola_droid_1
+  url: http://en.wikipedia.org/wiki/Motorola_Droid
+  owner: Devin Corr-Robinett
+
+- phone: Motorola Admiral XT603
+  id: motorola_xt603
+  url: http://www.gsmarena.com/motorola_admiral_xt603-4282.php
+  owner: Darren Kwong
+  works: true
+
+- phone: Motorola RAZR XT910
+  id: motorola_xt910
+  url: http://www.gsmarena.com/motorola_razr_xt910-4273.php
+  owner: ???
+
+- phone: Nexus 4
+  id: nexus_4
+  url: http://en.wikipedia.org/wiki/Nexus_4
+  owner: Armin Askari
+
+- phone: Nexus 5
+  id: nexus_5
+  url: http://en.wikipedia.org/wiki/Nexus_5
+  owner: Jeremy Fleischman
+
+- phone: Nexus S
+  id: nexus_s
+  url: http://en.wikipedia.org/wiki/Nexus_S
+  owner: ???
+
+- phone: Samsung Galaxy Chat
+  id: samsung_chat
+  url: http://www.gsmarena.com/samsung_galaxy_chat_b5330-4866.php
+  owner: ???
+
+- phone: Samsung Galaxy S3
+  id: samsung_galaxy_s3
+  url: http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III
+  owner: Steven Xu
+
+- phone: Samsung Galaxy S4
+  id: samsung_galaxy_s4
+  url: http://en.wikipedia.org/wiki/Samsung_Galaxy_S_4
+  owner: Harris Karsch
+
+- phone: Samsung Note Tablet
+  id: samsung_note
+  url: ???
+  owner: Alan Chang
+
+- phone: T-Mobile myTouch 4G
+  url: http://www.gsmarena.com/t_mobile_mytouch_4g-3520.php
+  note: Won't turn off built in microphone, a la iPhone.
+  owner: ???
+
+- phone: Galaxy Tab 3 10.1
+  url: http://www.gsmarena.com/samsung_galaxy_tab_3_10_1_p5220-5491.php
+  note: Won't turn off built in microphone, a la iPhone.
+  owner: ???

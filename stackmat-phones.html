@@ -1,0 +1,67 @@
+---
+layout: default
+title: Stackmats and Smartphones
+---
+
+<style>
+tbody tr.works td {
+    background-color: #90EE90;
+}
+.content {
+    /* Allow content to fill up the screen horizontally. */
+    /* TODO - this is gross, add a default-unbounded layout for this instead. */
+    max-width: 100% !important;
+}
+</style>
+
+<h1>Smartphone Stackmat Signals</h1>
+
+<p>
+I've been going around plugging stackmats into every smartphone I can get my hands on.
+I created this page to keep track of the signals I've recorded.
+</p>
+
+<h2>Setup</h2>
+<p>
+You need a special adapter to plug into the microphone wire of smartphones's headset jack. I use something like
+<a href="http://www.volumerate.com/product/3-5mm-male-to-2-3-5mm-female-audio-video-cable-for-tablets-more-black-red-green-20cm-241012?utm_source=dx&utm_medium=pp&campaign=vrproductpage">this</a>.
+Some smartphones need to be "tricked" into reading from the microphone line by
+adding a resistor between the microphone and the ground. This is something all
+iPhones do. I don't know why. See
+<a href="http://www.danacsimmons.com/content/working-iphone-audio-input">this page</a>
+for more information.
+</p>
+
+<p>
+If you want more details about why phones do this, and how to work around it,
+please see my
+<a href="{% post_url 2014-08-21-dialup-stackmat %}">blog post</a>
+on the subject of smartphones and stackmats.
+</p>
+
+<h2>Data</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>Phone</td>
+            <td>Signal</td>
+            <td>Note</td>
+            <td>Owner</td>
+        </tr>
+    </thead>
+    {% for phone_hash in site.data.stackmat.phones %}
+        <tr {%if phone_hash.works %}class="works"{%endif%}>
+            <td><a href="{{phone_hash.url}}">{{phone_hash.phone}}</a></td>
+            <td>
+                {% if phone_hash.id %}
+                    <a href="{{site.baseurl}}public/stackmat/{{phone_hash.id}}.wav">
+                        <img src="{{site.baseurl}}public/stackmat/{{phone_hash.id}}.png" />
+                    </a> 
+                {% endif %}
+            </td>
+            <td>{{phone_hash.note}}</td>
+            <td>{{phone_hash.owner}}</td>
+        <tr>
+    {% endfor %}
+</table>
