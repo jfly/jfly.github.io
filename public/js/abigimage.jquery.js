@@ -401,7 +401,6 @@ $(function() {//<<<
         this.imgNext            = imgNext           .attr(opts.imgNextAttrs)            .css(opts.imgNextCSS);
         this.imgPrev            = imgPrev           .attr(opts.imgPrevAttrs)            .css(opts.imgPrevCSS);
         this.bottom             = bottom            .attr(opts.bottomAttrs)             .css(opts.bottomCSS);
-        console.log(this);//<<<
 
         var prevBtnUnHoverCSS = {};
         for (var p in opts.prevBtnHoverCSS) {
