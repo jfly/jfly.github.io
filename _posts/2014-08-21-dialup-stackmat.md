@@ -125,6 +125,9 @@ plugging the stackmat into a phone!
 
 {% include image.html src="dialup-stackmat/band-pass-filter-analysis.png" alt="300 Hz - 3400 Hz band pass filter frequency analysis. Note that a lot of the higher frequencies are gone, and the very lowest frequencies have dropped off." %}
 
+If you're interested in how different phones handle the stackmat signal, please
+see [all these signals I've collected](/stackmat-phones/).
+
 This begs the question: how do you translate the stackmat signal into a range
 of frequencies that phones do support? It turns out this problem (transmission of
 digital bits over a link designed for human voice) has already been solved.
