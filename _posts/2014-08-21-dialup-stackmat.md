@@ -239,8 +239,11 @@ With our custom board in hand, I wrote code to demodulate the FSK signal
 code is written in C++, and compiles to Javascript with
 [Emscripten](https://github.com/kripken/emscripten). This is what powers the
 web demo  at [http://www.jflei.com/fskube/](http://www.jflei.com/fskube/).
-Since the code is written in C++, it will be easy to develop iOS and Android
-apps without having to rewrite anything.
+Since the code is written in C++, it will be easy to develop an iOS app if we
+want to.
+[Patricia Li](https://www.worldcubeassociation.org/results/p.php?i=2009LIPA01),
+Darren Kwong, and I have already written an Android app using the
+[Android NDK](https://developer.android.com/tools/sdk/ndk/index.html).
 
 ### Demo
 
@@ -259,3 +262,10 @@ Nationals or Worlds.
 getting boards mass produced, please drop me a line! I'm very out of my element
 here.
 * Integration with a live results system for WCA competitions.
+
+## Acknowledgements
+
+* Eithan Shavit for teaching me everything I know about hardware and
+  electricity (that's still not very much, but that's not his fault).
+* Patricia Li for encouragement and for proof reading. She also wrote the skeleton
+  of the Android demo app.
