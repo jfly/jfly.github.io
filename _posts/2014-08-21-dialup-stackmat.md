@@ -24,23 +24,23 @@ prescribed in the
 8. The completed scorecard is given to a staff member whose sole job is to
    manually enter all the times into a computer.
 
-Data entry is a mind numbing, error prone job.
+Data entry is a mind-numbing, error-prone job.
 [C.A.L. Cube Timer (CCT)]({% post_url 2014-08-20-cct %}) leveraged the
 stackmat's display port to plug stackmats into computers. Why not do the same
 thing to automate data entry at competitions?
 
-As a matter of fact, this has been done. All the way back in 2012, a group of Polish programmers built a
+As a matter of fact, this has been done. Back in 2012, a group of Polish programmers built a
 custom piece of hardware to interface with the stackmat and provide live
 results at a competition. The project is called
 [opencubeware](https://www.facebook.com/opencubeware). Unfortunately, there
-isn't much information about it on the facebook group, and their website
+isn't much information about it on the Facebook group, and their website
 [www.opencubeware.org](http://www.opencubeware.org/) is currently a
 blank page.
 
 How do they handle multiple ongoing rounds? What
 device aggregates the results from all the devices? What form of wireless do
 they use to communicate with that box? What's security like? It looks like
-they're battery powered, how long do they last on battery? How do you program the id cards? Most importantly, how much does everything cost?
+the devices are battery powered, how long do they last on battery? How do you program the id cards? Most importantly, how much does everything cost?
 
 Opencubeware is a truly impressive feat of engineering, but I'm convinced it's
 not the right direction for us to go. The devices appear to be wireless, and there's no discussion of security. It's also unclear how you handle multiple ongoing rounds with the minimal ui. Today, smartphones are ubiquitous and *cheap*.
@@ -78,18 +78,17 @@ It wasn't until January 2014 that I revisited the problem. One day at work, my
 coworker
 [Eithan Shavit](http://www.eithanshavit.com/) caught me looking at pictures of
 stackmat signals. As luck would have it, Eithan studied Electrical Engineering
-before getting a job in software. He was interested in the distorted signal, and
+before getting a job in software. He was interested in the distorted signal and
 was able to shed some light on what was going on.
 
-Amazingly enough, phones are designed to record human voice. Human speech contains
-a large range of frequencies, but you only need to listen to a small
-range of those frequencies to understand what somebody is saying. That range of
-frequencies is approximately
-[300 Hz to 3400 Hz](http://en.wikipedia.org/wiki/Voice_frequency).
+Amazingly enough, phones are designed to record human voice.
+Human speech contains a large range of frequencies, approximately
+[300 Hz to 3400 Hz](http://en.wikipedia.org/wiki/Voice_frequency),
+to understand what somebody is saying. 
 Phones can drop frequencies outside of that range if they want to, but they
 *must* preserve all frequencies within that range.
 
-Unfortunately, the digital data that comes out of a stackmat looks nothing like human voice.
+Unfortunately, the digital data that comes out of a stackmat looks nothing like a speech signal.
 To conceptualize what a phone does when it receives the square waves of the
 stackmat signal, it is necessary to visualize the square wave in terms of its
 component frequencies. This exercise is known as [Fourier
@@ -113,7 +112,7 @@ Hz. Audacity makes it easy to perform this experiment.
 
 {% include image.html src="dialup-stackmat/no-filter-analysis.png" alt="Unfiltered stackmat signal frequency analysis. Note the bias towards low frequency signals." %}
 
-Now apply a band pass filter that attenuates all frequencies between 300 Hz and
+Now we apply a band pass filter that attenuates all frequencies between 300 Hz and
 3400 Hz. Note that we're not harshly cutting off all frequencies outside of
 this range, they are dampened instead. This is a reasonable approximation of
 what happens in the real world: devices gradually lose sensitivity to
@@ -144,6 +143,11 @@ If the mark and space frequencies you chose are within the range of frequencies
 that phones support, you're golden.
 
 {% include image.html src="dialup-stackmat/fsk.jpg" alt="<a href='http://ironbark.xtelco.com.au/subjects/DC/lectures/7/fig_2010_07_05.jpg'>FSK</a> encoding of a digital signal" %}
+
+In the previous picture, the top signal represents the stackmat signal. The
+"mo" part of a modem would take this signal and produce the wavy bottom signal
+(FSK encoded). We then run the FSK encoded signal into a stackmat, which
+would then recover the original bits by doing frequency analysis in software.
 
 Eithan did some research, and discovered the
 [DS8500 HART Modem](http://www.maximintegrated.com/en/products/interface/current-loop-products-4-20ma/DS8500.html).
