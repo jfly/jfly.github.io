@@ -22,9 +22,7 @@ author:
   name:           'Jeremy Fleischman'
   url:            http://jflei.com
 
-# TODO - abigimage doesn't support more than one gallery, so we're ensuring
-# that only one post shows up at a time
-paginate:         1
+paginate:         5
 
 # Custom vars
 

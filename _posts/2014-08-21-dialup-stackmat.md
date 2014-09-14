@@ -2,7 +2,6 @@
 layout: post
 title: Dialup Stackmat
 date: 2014-08-21
-hidden: true
 ---
 
 For those of you who have never been to a Rubik's Cube competition, they are
@@ -29,21 +28,19 @@ Data entry is a mind-numbing, error-prone job.
 stackmat's display port to plug stackmats into computers. Why not do the same
 thing to automate data entry at competitions?
 
-As a matter of fact, this has been done. Back in 2012, a group of Polish programmers built a
-custom piece of hardware to interface with the stackmat and provide live
-results at a competition. The project is called
-[opencubeware](https://www.facebook.com/opencubeware). Unfortunately, there
-isn't much information about it on the Facebook group, and their website
-[www.opencubeware.org](http://www.opencubeware.org/) is currently a
-blank page.
+As a matter of fact, this has been done. Back in 2012, a group of programmers built a
+custom piece of hardware to interface with the stackmat and send results to a
+central server. They built enough infrastructure to actually run a few
+competitions in Poland. There isn't much information on the Facebook page for
+[opencubeware](https://www.facebook.com/opencubeware), but
+it's clear that the device they built is an impressive feat of
+engineering. I'd love to know how they get data from their device to a central
+server (Bluetooth? Wi-Fi? A custom wireless protocol?)
 
-How do they handle multiple ongoing rounds? What
-device aggregates the results from all the devices? What form of wireless do
-they use to communicate with that box? What's security like? It looks like
-the devices are battery powered, how long do they last on battery? How do you program the id cards? Most importantly, how much does everything cost?
-
-Opencubeware is a truly impressive feat of engineering, but I'm convinced it's
-not the right direction for us to go. The devices appear to be wireless, and there's no discussion of security. It's also unclear how you handle multiple ongoing rounds with the minimal ui. Today, smartphones are ubiquitous and *cheap*.
+As cool as opencubeware is, I believe it's not the right direction for us to go in.
+Building a custom piece of hardware is expensive and inflexible.
+Today, smartphones are ubiquitous and *cheap*, and they can be programmed to do
+almost anything we want.
 I believe we can build a more secure, reliable, easy to use results system on
 commodity cell phones than we could ever achieve by building our own custom device.
 It's easier to create an android app than it is to write firmware for a
@@ -92,8 +89,8 @@ Unfortunately, the digital data that comes out of a stackmat looks nothing like 
 To conceptualize what a phone does when it receives the square waves of the
 stackmat signal, it is necessary to visualize the square wave in terms of its
 component frequencies. This exercise is known as [Fourier
-analysis](http://en.wikipedia.org/wiki/Fourier_analysis). Fortunately,
-Wikipedia has already done this for us.
+analysis](http://en.wikipedia.org/wiki/Fourier_analysis).
+Thank you, Wikipedia:
 
 {% include image.html src="dialup-stackmat/Squarewave01CJC.png" alt='Components of a square wave. From <a href=\'http://en.wikipedia.org/wiki/File:Squarewave01CJC.png\'>http://en.wikipedia.org/wiki/File:Squarewave01CJC.png</a>' %}
 
@@ -146,7 +143,8 @@ that phones support, you're golden.
 
 In the previous picture, the top signal represents the stackmat signal. The
 "mo" part of a modem would take this signal and produce the wavy bottom signal
-(FSK encoded). We then run the FSK encoded signal into a stackmat, which
+(FSK encoded). If we chose our mark and space frequencies correctly, then the
+FSK encoded signal is safe to run into a smartphone, which
 would then recover the original bits by doing frequency analysis in software.
 
 Eithan did some research, and discovered the

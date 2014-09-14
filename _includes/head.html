@@ -23,6 +23,7 @@
   <script src="{{ site.baseurl }}public/js/abigimage.jquery.js"></script>
   <script>
     $(function() {
+        /*
         // Put the images for each post in their own lightbox, rather than one
         // huge gallery.
         // TODO - abigimage doesn't support more than one gallery!
@@ -38,6 +39,18 @@
                 );
               }
             });
+        });
+        */
+        var images = $("a.lightbox");
+        images.abigimage({
+          bottomCSS: {
+            fontSize: '1em'
+          },
+          onopen: function (target) {
+            this.bottom.html(
+              $('img', target).attr('alt') || ''
+            );
+          }
         });
     });
   </script>
