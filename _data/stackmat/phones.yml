@@ -79,3 +79,9 @@
   url: http://www.gsmarena.com/samsung_galaxy_tab_3_10_1_p5220-5491.php
   note: Won't turn off built in microphone, a la iPhone.
   owner: ???
+
+- phone: HTC Desire-Z
+  id: htc_desire_z
+  url: http://www.gsmarena.com/htc_desire_z-3421.php
+  owner: Mingyuan Zhang (张铭源)
+  works: true
