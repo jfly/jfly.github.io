@@ -85,3 +85,9 @@
   url: http://www.gsmarena.com/htc_desire_z-3421.php
   owner: Mingyuan Zhang (张铭源)
   works: true
+
+- phone: LG Optimus L5 II E460
+  id: lg_e460
+  url: http://www.gsmarena.com/lg_optimus_l5_ii_e460-5293.php
+  owner: Balogh Zsófia
+  note: Work's with DCTimer!
