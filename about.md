@@ -38,7 +38,7 @@ single with an 11.28 second solve.
 
 ### Projects I'm particularly proud of
 
-(in rougly chronological order)
+(in roughly chronological order)
 
 * 2003:
 <a name="ti"></a>
