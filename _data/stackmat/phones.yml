@@ -86,6 +86,12 @@
   owner: Mingyuan Zhang (张铭源)
   works: true
 
+- phone: LG Optimus L5 II E460
+  id: lg_e460
+  url: http://www.gsmarena.com/lg_optimus_l5_ii_e460-5293.php
+  owner: Balogh Zsófia
+  note: Work's with DCTimer!
+
 - phone: LG L65 D280
   id: lg_lg65_d280
   url: http://www.gsmarena.com/lg_l65_d280-6315.php
