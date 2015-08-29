@@ -101,4 +101,4 @@
   id: wiko_rainbow
   url: http://www.gsmarena.com/wiko_rainbow-6807.php
   owner: Harry Smith
-  note: Works with DCTimer!
+  note: Works with DCTimer! Required [SoundAbout](https://play.google.com/store/apps/details?id=com.woodslink.android.wiredheadphoneroutingfix&hl=en) to force use of the microphone. Demo [video1](https://www.youtube.com/watch?v=jOj3AKSnilE), [video2](https://www.youtube.com/watch?v=CjQXNHtHDu0).

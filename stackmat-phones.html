@@ -60,8 +60,8 @@ on the subject of smartphones and stackmats.
                     </a> 
                 {% endif %}
             </td>
-            <td>{{phone_hash.note}}</td>
-            <td>{{phone_hash.owner}}</td>
+            <td>{%if phone_hash.note %}{{phone_hash.note | markdownify}}{%endif%}</td>
+            <td>{%if phone_hash.owner %}{{phone_hash.owner | markdownify}}{%endif%}</td>
         <tr>
     {% endfor %}
 </table>
