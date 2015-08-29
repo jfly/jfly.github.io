@@ -72,12 +72,12 @@
 
 - phone: T-Mobile myTouch 4G
   url: http://www.gsmarena.com/t_mobile_mytouch_4g-3520.php
-  note: Won't turn off built in microphone, a la iPhone.
+  note: Will not turn off built in microphone, a la iPhone.
   owner: ???
 
 - phone: Galaxy Tab 3 10.1
   url: http://www.gsmarena.com/samsung_galaxy_tab_3_10_1_p5220-5491.php
-  note: Won't turn off built in microphone, a la iPhone.
+  note: Will not turn off built in microphone, a la iPhone.
   owner: ???
 
 - phone: HTC Desire-Z
@@ -90,9 +90,15 @@
   id: lg_e460
   url: http://www.gsmarena.com/lg_optimus_l5_ii_e460-5293.php
   owner: Balogh Zsófia
-  note: Work's with DCTimer!
+  note: Works with DCTimer!
 
 - phone: LG L65 D280
   id: lg_lg65_d280
   url: http://www.gsmarena.com/lg_l65_d280-6315.php
   owner: António Gomes
+
+- phone: Wiko Rainbow
+  id: wiko_rainbow
+  url: http://www.gsmarena.com/wiko_rainbow-6807.php
+  owner: Harry Smith
+  note: Works with DCTimer!
