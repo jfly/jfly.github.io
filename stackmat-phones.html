@@ -51,7 +51,7 @@ on the subject of smartphones and stackmats.
         </tr>
     </thead>
     {% for phone_hash in site.data.stackmat.phones %}
-        <tr {%if phone_hash.works %}class="works"{%endif%}>
+        <tr {%if phone_hash.works %}class="works"{%endif%} id="{{phone_hash.id}}">
             <td><a href="{{phone_hash.url}}">{{phone_hash.phone}}</a></td>
             <td>
                 {% if phone_hash.id %}
