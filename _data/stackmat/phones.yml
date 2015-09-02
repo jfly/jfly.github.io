@@ -102,3 +102,8 @@
   url: http://www.gsmarena.com/wiko_rainbow-6807.php
   owner: Harry Smith
   note: Works with DCTimer! Required [SoundAbout](https://play.google.com/store/apps/details?id=com.woodslink.android.wiredheadphoneroutingfix&hl=en) to force use of the microphone. Demo [video1](https://www.youtube.com/watch?v=jOj3AKSnilE), [video2](https://www.youtube.com/watch?v=CjQXNHtHDu0).
+
+- phone: Fire HD 6
+  id: fire_hd6
+  url: http://www.gsmarena.com/amazon_fire_hd_6-6688.php
+  owner: Jeremy Fleischman
