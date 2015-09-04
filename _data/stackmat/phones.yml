@@ -107,3 +107,15 @@
   id: fire_hd6
   url: http://www.gsmarena.com/amazon_fire_hd_6-6688.php
   owner: Jeremy Fleischman
+
+- phone: Motorola Moto X Gen 2
+  id: moto_x_gen_2
+  url: http://www.gsmarena.com/motorola_moto_x_(2nd_gen)-6649.php
+
+- phone: Samsung Galaxy Note 4
+  id: galaxy_note_4
+  url: http://www.gsmarena.com/samsung_galaxy_note_4-6434.php
+
+- phone: Nexus 6
+  id: nexus_6
+  url: http://www.gsmarena.com/motorola_nexus_6-6604.php
