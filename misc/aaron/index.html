@@ -1,305 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<title>Aaron and Gabe's Trek</title>
-		<!-- Make the document body take up the full screen -->
+		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+
 		<style type="text/css">
 			html, body {width: 100%; height: 100%}
 			body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px}
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      #overlayControls {
+        position: absolute;
+        left: 5px;
+        bottom: 30px;
+      }
 		</style>
-		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
-		<script src="twitter-1.13.1.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAw45RQKumxTtr2024aaXUMRSAVjjndmbLCnWwyNzA1zbE4EoashQNzdi_TrSWvsKyqMXALUSN1a_pFA"></script>
-		<script type="text/javascript">
-		google.load("feeds", "1");
-		google.load("maps", "2");
-		
-		function formatDate(d) {
-			return d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate() + " " + d.toLocaleTimeString();
-		}
-		
-		function createLinks(tweet) {
-			//return tweet.tweet.replace(/(http:\/\/[^\s]*)/gi, "<a href='$1' target='_blank'>$1</a>");
-			var rawText = tweet.tweet;
-			var regex = /(http:\/\/[^\s]*)/gi;
-			var result = "";
-			var last = 0;
-			var img_link_count = 0;
-			while(match = regex.exec(rawText)) {
-				result += rawText.substring(last, match.index);
-				
-				var pictar = (/http:\/\/twitgoo.*/).test(match[0]);
-				if(pictar) {
-					var image = "<img width='200px' src='" + tweet.img_urls[img_link_count] + "' />";
-					result += "<a target='_blank' href='" + tweet.img_urls[img_link_count] + "'>" + image + "</a>";
-					img_link_count++;
-				} else
-					result += "<a target='_blank' href='" + match[0] + "'>" + match[0] + "</a>";
-				last = match.index + match[0].length;
-			}
-			result += rawText.substring(last);
-			return result;
-		}
-		
-		function formatTweet(tweet) {
-			var str = formatDate(tweet.date) + " <b>Day " + (tweet.day) + "</b> ";
-			//alert(tweet.day);
-			if(tweet.gloc) {
-				str += "<br/>" + tweet.distance_today.toFixed(1) + " miles since last tweet / " + tweet.distance_total.toFixed(1) + " total / " + tweet.distance_home.toFixed(1) + " from home";
-				str += " / " + (tweet.distance_total/tweet.day).toFixed(2) + " ave miles/day";
-			}
-			str += "<br/><a target='_blank' href='http://twitter.com/Aaron2Phipps'><img style='margin-right: 3px;' align='left' src='http://a1.twimg.com/profile_images/753528282/ollie_and_aaron_bigger.jpg' /></a>" + createLinks(tweet);
-			return "<p>" + str + "</p>";
-		}
-		
-		function getMiles(gloc1, gloc2) {
-			return (gloc1.distanceFrom(gloc2)/1609.344);
-		}
-		
-		function tweetForward() {
-			tweets = tweetz;
-			do {
-				curr_tweet = (tweets.length + curr_tweet + 1) % tweets.length; //stupid mod vs remainder
-			} while(!tweets[curr_tweet].marker);
-			tweets[curr_tweet].marker.openInfoWindowTabsHtml(tweets[curr_tweet].tabs);
-		}
-		
-		function tweetBackward() {
-			tweets = tweetz;
-			do {
-				curr_tweet = (tweets.length + curr_tweet - 1) % tweets.length; //stupid mod vs remainder
-			} while(!tweets[curr_tweet].marker);
-			tweets[curr_tweet].marker.openInfoWindowTabsHtml(tweets[curr_tweet].tabs);
-		}
-		
-		var tweetz;
-		var curr_tweet = -1;
-		function createMap(tweets) {
-			tweetz = tweets;
-			curr_tweet = -1;
-			// We define the function first
-			function TextualZoomControl() {}
 
-			// To "subclass" the GControl, we set the prototype object to
-			// an instance of the GControl object
-			TextualZoomControl.prototype = new GControl();
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
 
-			// Creates a one DIV for each of the buttons and places them in a container
-			// DIV which is returned as our control element. We add the control to
-			// to the map container and return the element for the map class to
-			// position properly.
-			TextualZoomControl.prototype.initialize = function(map) {
-				var container = document.createElement("div");
-
-				
-				var zoomInDiv = document.createElement("div");
-				this.setButtonStyle_(zoomInDiv);
-				container.appendChild(zoomInDiv);
-				zoomInDiv.appendChild(document.createTextNode(">"));
-				GEvent.addDomListener(zoomInDiv, "click", tweetForward);
-
-				var zoomOutDiv = document.createElement("div");
-				this.setButtonStyle_(zoomOutDiv);
-				container.appendChild(zoomOutDiv);
-				zoomOutDiv.appendChild(document.createTextNode("<"));
-				GEvent.addDomListener(zoomOutDiv, "click", tweetBackward);
-
-				var creditDiv = document.createElement("div");
-				this.setButtonStyle_(creditDiv);
-				container.appendChild(creditDiv);
-				creditDiv.appendChild(document.createTextNode("Created by Jeremy Fleischman from Aaron Phipps's twitter page."));
-				GEvent.addDomListener(creditDiv, "click", function() { window.open('http://twitter.com/Aaron2Phipps'); });
-				map.getContainer().appendChild(container);
-				return container;
-			}
-
-			// By default, the control will appear in the top left corner of the
-			// map with 7 pixels of padding.
-			TextualZoomControl.prototype.getDefaultPosition = function() {
-				return new GControlPosition(G_ANCHOR_BOTTOM_RIGHT, new GSize(7, 7));
-			}
-
-			// Sets the proper CSS for the given button element.
-			TextualZoomControl.prototype.setButtonStyle_ = function(button) {
-				button.style.textDecoration = "underline";
-				button.style.color = "#0000cc";
-				button.style.backgroundColor = "white";
-				button.style.font = "small Arial";
-				button.style.border = "1px solid black";
-				button.style.padding = "2px";
-				button.style.marginBottom = "3px";
-				button.style.textAlign = "center";
-				button.style.width = "6em";
-				button.style.cursor = "pointer";
-			}
-		
-			var map = new GMap2(document.getElementById("map"));
-			map.addControl(new TextualZoomControl());
-			map.setUIToDefault();
-			
-			//var customUI = map.getDefaultUI(); 
-			//customUI.controls.scalecontrol = false; 
-			//map.setUI(customUI);
-			
-			var waypoints = [];
-			for(var i = 0; i < tweets.length; i++) {
-				var tweet = tweets[i];
-				if(tweet.lat) {
-					var point = new GLatLng(tweet.lat, tweet.long);
-					waypoints.push(tweet.lat + "," + tweet.long);
-				}
-			}
-			
-			var tweet_locs = [];
-			var sum_lat = 0;
-			var sum_long = 0;
-			var marker_count = 0;
-			
-			var first_tweet = tweets[0];
-			var prev_tweet = tweets[0];
-			var last_marked_tweet = tweets[0];
-			tweets[0].tabs = [];
-			last_marked_tweet.distance_total = 0;
-			for(var i = 0; i < tweets.length; i++) {
-				var tweet = tweets[i];
-				if(tweet.gloc) {
-					sum_lat += tweet.gloc.lat();
-					sum_long += tweet.gloc.lng();
-					marker_count++;
-					
-					tweet_locs.push(tweet.gloc);
-					tweet.marker = new GMarker(tweet.gloc);
-					GEvent.addListener(tweet.marker, "click", function wrapper(i) { return function() {
-						curr_tweet = i;
-					}}(i));
-
-					map.addOverlay(tweet.marker);				
-					tweet.distance_home = getMiles(tweet.gloc, first_tweet.gloc);
-					tweet.distance_today = getMiles(tweet.gloc, last_marked_tweet.gloc);
-					tweet.distance_total = last_marked_tweet.distance_total + tweet.distance_today;
-					tweet.tabs = [];
-					tweet.marker.bindInfoWindowTabsHtml(tweet.tabs);
-					tweet.tabs.push(new GInfoWindowTab(tweet.day+1, formatTweet(tweet)));
-					
-					last_marked_tweet = tweet;
-				} else {
-					//appending to previous marker
-					last_marked_tweet.tabs.push(new GInfoWindowTab(tweet.day+1, formatTweet(tweet)));
-				}
-				prev_tweet = tweet;
-			}
-			var polyline = new GPolyline(tweet_locs, "#FF0000", 10);
-			map.addOverlay(polyline);
-			//map.setCenter(new GLatLng(sum_lat/marker_count, sum_long/marker_count), 9);
-			map.setCenter(new GLatLng(last_marked_tweet.gloc.lat(), last_marked_tweet.gloc.lng()), 9);
-		}
-		
-		function dateDiff(d2, d1) {
-			var diff = d2 - d1;
-			return isNaN(diff) ? NaN : {
-				diff : diff,
-				ms : Math.floor( diff            % 1000 ),
-				s  : Math.floor( diff /     1000 %   60 ),
-				m  : Math.floor( diff /    60000 %   60 ),
-				h  : Math.floor( diff /  3600000 %   24 ),
-				d  : (diff / 86400000).toFixed(1)
-			};
-		}
-		
-		function finalize(tweets) {
-			tweets.sort(function(a, b) { return a.date - b.date; });
-			for(var i = 0; i < tweets.length; i++) {
-				tweets[i].day = dateDiff(tweets[i].date, tweets[0].date).d;
-			}
-			createMap(tweets);
-		}
-		
-		function initialize(entries) {
-			debugger;//<<<
-			var tweets = [];
-			var pendingRequests = 0;
-			
-			for (var i = 0; i < entries.length; i++) {
-				var entry = entries[i];
-				entry.created_at = entry.created_at.replace('+0000', 'GMT'); //stupid ie doesn't like +0000
-				var tweet = { 'date': new Date(entry.created_at), 'tweet': entry.text, 'profile_image_url': entry.user.profile_image_url };
-				tweets.push(tweet);
-
-				function setTweetLocation(index, mapurl) {
-					var floatReg = "-?[0-9]+\.[0-9]+";
-					var lat_long = mapurl.match("(" + floatReg + "),(" + floatReg + ").*");
-					if(lat_long)
-						tweets[index].gloc = new GLatLng(parseFloat(lat_long[1]), parseFloat(lat_long[2]));
-				}
-				var tinyurl = entry.text.match("(http://is.gd/[^\\s]*)");
-				var mapurl = entry.text.match("(http://maps.google.com/[^\\s]*)");
-				if(tinyurl) {
-					var feed = new google.feeds.Feed("http://pipes.yahoo.com/pipes/pipe.run?_id=b9eb97a207cac39b37cebfa4b391c7c0&_render=rss&tinyurl=" + encodeURIComponent(tinyurl[1]));
-					function createTinyurlCallback(index) {
-						return function(result) {
-							if (!result.error) {
-								var entry = result.feed.entries[0];
-								setTweetLocation(index, entry.content);
-							}
-							pendingRequests--;
-							if(pendingRequests == 0)
-								finalize(tweets);
-						}
-					}
-					pendingRequests++;
-					feed.load(createTinyurlCallback(i));
-				} else if(mapurl) {
-					setTweetLocation(i, mapurl[1]);
-				} else {
-					//no tinyurl indicating our location
-				}
-				
-				var images = entry.text.match(/http:\/\/twitgoo.com[^\s]*/gi);
-				for(var j = 0; images && j < images.length; j++) {
-					tweets[i].img_urls = [];
-					var feed = new google.feeds.Feed("http://pipes.yahoo.com/pipes/pipe.run?_id=950e518c2fb7d0ecc3ef6eb8596b8e66&_render=rss&tinyurl=" + encodeURIComponent(images[j]));
-					function createImageCallback(tweet_index, img_index) {
-						return function(result) {
-							if (!result.error) {
-								for (var i = 0; i < result.feed.entries.length; i++) {
-									var entry = result.feed.entries[i];
-									var img_url = entry.content.match(/http:\/\/[^\s]*.jpg/gi);
-									tweets[tweet_index].img_urls.push(img_url[0]);
-								}
-							}
-							pendingRequests--;
-							if(pendingRequests == 0) {
-								finalize(tweets);
-							}
-						}
-					}
-					pendingRequests++;
-					feed.load(createImageCallback(i, j));
-				}
-			}
-		}
-		getTwitters('msg', {
-		  id: "Aaron2Phipps",
-		  prefix: '<img height="16" width="16" src="%profile_image_url%" /><a href="http://twitter.com/%screen_name%">%name%</a> said: ',
-		  clearContents: false, // leave the original message in place
-		  count: 1000,
-		  withFriends: true,
-		  ignoreReplies: false,
-		  template: '<span class="twitterPrefix"><img height="16" width="16" src="%user_profile_image_url%" /> <span class="twitterStatus">"%text%"</span> <em class="twitterTime"><a href="http://twitter.com/%user_screen_name%/statuses/%id%">%time%</a></em>',
-		  callback: initialize
-		});
-		
-		function keyPressHandler(e) {
-			if(e.keyCode == 37) { //left key
-				tweetBackward();
-			} else if(e.keyCode == 39) {
-				tweetForward();				
-			}
-		}
-		</script>
+    <script src="index.js"></script>
 	</head>
-	<body onkeydown="keyPressHandler(event)">		
-		<div id="map" style="width: 100%; height: 100%;"></div>
+  <body>
+		<div id="map"></div>
+    <div id="overlayControls">
+      <button id="previousTweet">&lt;</button>
+      <button id="nextTweet">&gt;</button>
+      Created by Jeremy Fleischman from Aaron Phipps's <a href="https://twitter.com/Aaron2Phipps">twitter</a> page.
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+            async defer></script>
 	</body>
 </html>

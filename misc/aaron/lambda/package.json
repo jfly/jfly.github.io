@@ -1,0 +1,16 @@
+{
+  "name": "aaron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lambda.js",
+  "dependencies": {
+    "async": "^1.4.2",
+    "dotenv": "^1.2.0",
+    "request": "^2.65.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}
