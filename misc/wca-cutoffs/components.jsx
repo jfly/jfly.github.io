@@ -34,17 +34,19 @@ let ResultRow = React.createClass({
 let ResultsTable = React.createClass({
   render() {
     return (
-      <table className="table table-striped table-condensed table-nonfluid">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th colSpan={SOLVES_IN_ROUND}>Solves</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.results.map((result, i) => <ResultRow key={i} result={result} />)}
-        </tbody>
-      </table>
+      <div className="table-responsive">
+        <table className="table table-striped table-condensed table-nonfluid">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th colSpan={SOLVES_IN_ROUND}>Solves</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.results.map((result, i) => <ResultRow key={i} result={result} />)}
+          </tbody>
+        </table>
+      </div>
     );
   },
 });
