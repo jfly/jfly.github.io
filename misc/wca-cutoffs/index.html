@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>WCA time limits/cutoffs demo</title>
+
+    <script src="https://fb.me/react-0.14.3.js"></script>
+    <script src="https://fb.me/react-dom-0.14.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classnames/2.2.0/dedupe.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/AceMetrix/jquery-deparam/c2a3fb9bca47e29cdf6b866b04ee8743da850b38/jquery-deparam.js"></script>
+    <script src="http://www.jflei.com/jChester/jChester.js"></script>
+
+    <script>
+      var wca_cutoffs = wca_cutoffs || {};
+    </script>
+    <script type="text/babel" src="data.js"></script>
+    <script type="text/babel" src="components.jsx"></script>
+    <script type="text/babel">
+      (function() {
+        // From http://www.cuber.com.br/worlds/index.php?location=events
+        let defaultTimeLimit = jChester.stopwatchFormatToSolveTime("3:00");
+        let defaultCutoff = jChester.stopwatchFormatToSolveTime("1:10");
+        let cumulativeTimeLimit = null;
+
+        let $timeLimit = $('#time-limit');
+        let $cutoff = $('#cutoff');
+        let $cumulativeTimeLimit = $('#cumulative-time-limit');
+
+        function looseParse(solveTimeStr, defaultSolveTime) {
+          if(solveTimeStr === "") {
+            return null;
+          }
+          try {
+            return jChester.stopwatchFormatToSolveTime(solveTimeStr);
+          } catch(e) {
+            return defaultSolveTime;
+          }
+        }
+
+        $(window).on('hashchange', function() {
+          let params = $.deparam(location.hash.substring(1));
+          let timeLimit = looseParse(params.timeLimit, defaultTimeLimit);
+          let cutoff = looseParse(params.cutoff, defaultCutoff);
+          let cumulativeTimeLimit = looseParse(params.cumulativeTimeLimit, cumulativeTimeLimit);
+
+          $timeLimit.jChester({ solveTime: timeLimit });
+          $cutoff.jChester({ solveTime: cutoff });
+          $cumulativeTimeLimit.jChester({ solveTime: cumulativeTimeLimit });
+
+          render();
+        }).trigger('hashchange');
+
+        function render() {
+          var timeLimit = $timeLimit.jChester('getSolveTime');
+          var cutoff = $cutoff.jChester('getSolveTime');
+          var cumulativeTimeLimit = $cumulativeTimeLimit.jChester('getSolveTime');
+
+          let hash = $.param({
+            timeLimit: timeLimit ? jChester.solveTimeToStopwatchFormat(timeLimit) : "",
+            cutoff: cutoff ? jChester.solveTimeToStopwatchFormat(cutoff) : "",
+            cumulativeTimeLimit: cumulativeTimeLimit ? jChester.solveTimeToStopwatchFormat(cumulativeTimeLimit) : "",
+          });
+          history.replaceState(null, null, '#' + hash);
+
+          ReactDOM.render(
+            <wca_cutoffs.components.RoundAnalysis
+              results={wca_cutoffs.results.worlds2015_444_r1}
+              timeLimit={timeLimit}
+              cutoff={cutoff}
+              cumulativeTimeLimit={cumulativeTimeLimit}
+            />,
+            document.getElementById('react-area')
+          );
+        }
+
+        $('.jChester').on("solveTimeInput", render);
+        render();
+      })();
+    </script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+    <style>
+      /* From http://stackoverflow.com/a/10688485 */
+      .table-nonfluid {
+        width: auto !important;
+      }
+
+      .table tbody td:nth-child(1) {
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .would-not-have-happened {
+        color: #ddd;
+      }
+
+      .would-have-DNFed {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Analysis of
+        <a href="https://www.worldcubeassociation.org/results/c.php?allResults=All+Results&competitionId=WC2015#e444_d" target="_blank">
+          Worlds 2015 4x4 Round 1
+        </a>
+      </h1>
+
+      Time limit <div class="jChester" id="time-limit"></div>
+      Combined round cutoff <div class="jChester" id="cutoff"></div>
+      Cumulative time limit <div class="jChester" id="cumulative-time-limit"></div>
+
+      <div id="react-area"></div>
+    </div>
+  </body>
+</html>
