@@ -1,6 +1,6 @@
 <div>
-    <a href="{{ site.baseurl }}public/img/full/{{ include.src }}" class="lightbox" data-fluidbox>
-        <img src="{{ site.baseurl }}public/img/thumbs/{{ include.src }}" title="{{ include.alt }}" alt="{{ include.alt }}">
+    <a href="{{ include.src }}" class="lightbox" data-fluidbox>
+        <img src="{{ include.src | split: "" | reverse | join: "" | replace_first: ".", ".bmuht-" | split: "" | reverse | join: "" }}" title="{{ include.alt }}" alt="{{ include.alt }}">
     </a>
     <div class="image-description">{{ include.alt }}</div>
 </div>

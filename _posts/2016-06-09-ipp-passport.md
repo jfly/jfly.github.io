@@ -4,14 +4,24 @@ title: IPP Passport
 date: 2016-06-09
 ---
 
-[Eitan Cher](http://www.eitancher.com/) gave me two interesting jigsaw puzzles
-on Monday at a board game night:
+[Eitan Cher](http://www.eitancher.com/) handed me this at a board game night on Monday:
 
-![Jigsaw puzzle](/misc/ipp-passport/image1.JPG)
+{% include image.html alt="Closed IPP passport" src="/misc/ipp-passport/pics/passport-closed.jpg" %}
 
-Eitan created a beautiful laser cut plastic passport out of these two patterns
-(the [Candian flag](https://en.wikipedia.org/wiki/Flag_of_Canada) and the [Japanese flag](https://en.wikipedia.org/wiki/Flag_of_Japan)).
-I failed to take a picture, but if I can get a picture from him, I'll upload it here.
+Inside were two maddening jigsaw puzzles designed by
+[Rex Rossano Perez](http://www.twistypuzzles.com/cgi-bin/pdb-search.cgi?act=inv&key=392):
+
+{% include image.html alt="Jigsaw puzzle" src="/misc/ipp-passport/pics/pattern.jpg" %}
+
+Eitan created a beautiful laser cut plastic passport out of these two patterns.
+
+The [Candian flag](https://en.wikipedia.org/wiki/Flag_of_Canada):
+
+{% include image.html alt="Canadian flag" src="/misc/ipp-passport/pics/maple.jpg" %}
+
+And the [Japanese flag](https://en.wikipedia.org/wiki/Flag_of_Japan):
+
+{% include image.html alt="Japanese flag" src="/misc/ipp-passport/pics/sun.jpg" %}
 
 Almost immediately, I knew I wasn't going to solve this puzzle by hand. During a flight to Wisconsin yesterday, I got a chance to code up a solution in Python 3
 (see [GitHub](https://github.com/jfly/jfly.github.io/tree/master/misc/ipp-passport#ipp-passport)).
