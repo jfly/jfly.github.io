@@ -14,6 +14,15 @@ I particularly love to combine my
 [ways](https://www.youtube.com/watch?v=b8JOC1NkVP8), and
 [attempt to do stupid things](https://www.youtube.com/watch?v=AorkxGK2Qow).
 
+### Present
+
+I am the leader of the
+[World Cube Association Software Team](https://www.worldcubeassociation.org/contact).
+I also work part time at
+[Saddle Point Systems](https://www.saddlepointsystems.com/resources/about/).
+
+### Past
+
 I graduated from San Clemente High School in 2006, and UC Berkeley in 2010.
 
 [Dan Dzoan](https://www.worldcubeassociation.org/results/p.php?i=2006DZOA03)
@@ -35,6 +44,9 @@ as a staff member and became US National Champion of one handed.
 
 At [Berkeley Spring 2013](https://www.worldcubeassociation.org/results/c.php?i=BerkeleySpring2013), I set the North American Record for one handed
 single with an 11.28 second solve.
+
+I worked at [Arista Networks](http://www.arista.com/) from August 2010 to
+March 2015, when I left to lead the WCA Software Team.
 
 ### Projects I'm particularly proud of
 
