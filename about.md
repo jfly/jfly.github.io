@@ -5,7 +5,7 @@ title: About Me
 
 Hey there! My name is Jeremy Fleischman. I love the outdoors,
 [coding](https://github.com/jfly/),
-[reading](http://www.shelfari.com/jfly/shelf), and
+[reading](https://www.goodreads.com/user/show/51546534-jeremy-fleischman), and
 [speedcubing](https://www.worldcubeassociation.org/results/p.php?i=2005FLEI01).
 I particularly love to combine my
 [interests](https://www.youtube.com/watch?v=seK7Kw4GR4o)
