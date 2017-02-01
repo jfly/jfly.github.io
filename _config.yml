@@ -15,12 +15,12 @@ permalink:        pretty
 # Setup
 title:            jflei
 description:      "jfly.com was too expensive"
-url:              http://jflei.com
+url:              https://www.jflei.com
 baseurl:          /
 
 author:
   name:           'Jeremy Fleischman'
-  url:            http://jflei.com
+  url:            https://www.jflei.com
 
 paginate:         5
 
