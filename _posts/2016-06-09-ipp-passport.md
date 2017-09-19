@@ -4,7 +4,7 @@ title: IPP Passport
 date: 2016-06-09
 ---
 
-[Eitan Cher](http://www.eitancher.com/) handed me this at a board game night on Monday:
+[Eitan Cher](http://www.eitancher.com/) handed this to me at a board game night on Monday:
 
 {% include image.html alt="Closed IPP passport" src="/misc/ipp-passport/pics/passport-closed.jpg" %}
 
