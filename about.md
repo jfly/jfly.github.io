@@ -98,8 +98,7 @@ generate scrambles server side, and
 TNoodle adopted as the World Cube Association's
 [official scrambler](https://www.worldcubeassociation.org/posts/wca-documents-updated-january-1-2013).
 
-I've also contributed to the [WCA workbook
-assistant](https://github.com/cubing/wca-workbook-assistant) and
+I've also contributed to the [WCA Workbook Assistant](https://github.com/cubing/wca-workbook-assistant) and
 [twisty.js](https://github.com/cubing/twisty.js).
 
 #### Thanks for stopping by!
