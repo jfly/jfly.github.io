@@ -18,7 +18,7 @@ permalink: pretty
 title: jflei
 description: "jfly.com was too expensive"
 url: https://www.jflei.com
-baseurl: /
+baseurl: ""
 
 author:
   name: 'Jeremy Fleischman'
