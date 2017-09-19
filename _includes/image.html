@@ -1,6 +1,7 @@
-<div>
-    <a href="{{ include.src }}" class="lightbox" data-fluidbox>
-        <img src="{{ include.src | split: "" | reverse | join: "" | replace_first: ".", ".bmuht-" | split: "" | reverse | join: "" }}" title="{{ include.alt }}" alt="{{ include.alt }}">
+<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <a href="{{ include.src }}" itemprop="contentUrl" data-size="{{ site.data.images[include.src].size }}">
+        <img src="{{ include.src | split: "" | reverse | join: "" | replace_first: ".", ".bmuht-" | split: "" | reverse
+| join: "" }}" itemprop="thumbnail" alt="{{ include.alt }}" />
     </a>
-    <div class="image-description">{{ include.alt }}</div>
-</div>
+    <figcaption itemprop="caption description">{{ include.alt }}</figcaption>
+</figure>

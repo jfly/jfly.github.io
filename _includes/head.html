@@ -16,44 +16,14 @@
   <link rel="stylesheet" href="{{ site.baseurl }}public/css/syntax.css">
   <link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
   <link rel="stylesheet" href="{{ site.baseurl }}public/css/jflei.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}public/photoswipe/photoswipe.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}public/photoswipe/default-skin/default-skin.css">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- JS -->
-  <script src="{{ site.baseurl }}public/js/jquery-2.1.1.min.js"></script>
-  <script src="{{ site.baseurl }}public/js/abigimage.jquery.js"></script>
-  <script>
-    $(function() {
-        /*
-        // Put the images for each post in their own lightbox, rather than one
-        // huge gallery.
-        // TODO - abigimage doesn't support more than one gallery!
-        $(".post").each(function(i, el) {
-            var images = $("a.lightbox", el);
-            images.abigimage({
-              bottomCSS: {
-                fontSize: '1em'
-              },
-              onopen: function (target) {
-                this.bottom.html(
-                  $('img', target).attr('alt') || ''
-                );
-              }
-            });
-        });
-        */
-        var images = $("a.lightbox");
-        images.abigimage({
-          bottomCSS: {
-            fontSize: '1em'
-          },
-          onopen: function (target) {
-            this.bottom.html(
-              $('img', target).attr('alt') || ''
-            );
-          }
-        });
-    });
-  </script>
+  <script src="{{ site.baseurl }}public/photoswipe/photoswipe.js"></script>
+  <script src="{{ site.baseurl }}public/photoswipe/photoswipe-ui-default.js"></script>
+  <script src="{{ site.baseurl }}public/js/init-photoswipe.js"></script>
 
   <!-- Google Analytics -->
   <script>
