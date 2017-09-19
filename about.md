@@ -18,8 +18,6 @@ I particularly love to combine my
 
 I am the leader of the
 [World Cube Association Software Team](https://www.worldcubeassociation.org/contact).
-I also work part time at
-[Saddle Point Systems](https://www.saddlepointsystems.com/resources/about/).
 
 ### Past
 
@@ -45,8 +43,10 @@ as a staff member and became US National Champion of one handed.
 At [Berkeley Spring 2013](https://www.worldcubeassociation.org/results/c.php?i=BerkeleySpring2013), I set the North American Record for one handed
 single with an 11.28 second solve.
 
-I worked at [Arista Networks](http://www.arista.com/) from August 2010 to
-March 2015, when I left to lead the WCA Software Team.
+I worked at [Arista Networks](https://www.arista.com) from August 2010 to
+March 2015, when I left to found and lead the WCA Software Team.
+
+I worked at [Saddle Point Systems](https://www.saddlepointsystems.com/resources/about/) from December 2015 to May 2016.
 
 ### Projects I'm particularly proud of
 
