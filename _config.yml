@@ -28,5 +28,4 @@ paginate: 5
 
 # Custom vars
 
-github:
-  repo: https://github.com/poole/hyde
+date_format: "%B %-d, %Y"
