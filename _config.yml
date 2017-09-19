@@ -1,30 +1,32 @@
 # Dependencies
-markdown:         kramdown
-highlighter:      rouge
+plugins: [jekyll-paginate]
+markdown: kramdown
+highlighter: rouge
+syntax_highlighter: coderay
+
+syntax_highlighter_opts:
+  line_numbers: ''
 
 kramdown:
   input: GFM
-  use_coderay: true
   hard_wrap: false
-  coderay:
-    coderay_line_numbers: ''
 
 # Permalinks
-permalink:        pretty
+permalink: pretty
 
 # Setup
-title:            jflei
-description:      "jfly.com was too expensive"
-url:              https://www.jflei.com
-baseurl:          /
+title: jflei
+description: "jfly.com was too expensive"
+url: https://www.jflei.com
+baseurl: /
 
 author:
-  name:           'Jeremy Fleischman'
-  url:            https://www.jflei.com
+  name: 'Jeremy Fleischman'
+  url: https://www.jflei.com
 
-paginate:         5
+paginate: 5
 
 # Custom vars
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo: https://github.com/poole/hyde

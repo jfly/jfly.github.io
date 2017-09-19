@@ -1,4 +1,7 @@
 _site
 
+# Ignore bundler config
+.bundle
+
 # vim stuff
 *.swp

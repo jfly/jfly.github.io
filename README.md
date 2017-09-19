@@ -1,6 +1,7 @@
 # jflei.com
 
 ## Development
+- `bundle install`
 - `bundle exec jekyll serve --watch`
 
 ## Generate thumbnails
