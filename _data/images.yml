@@ -1,71 +1,3 @@
-/img/IMG_1532.JPG:
-  size: 768x1024
-/img/dialup-stackmat/1.15_iphone3gs.png:
-  size: 1424x145
-/img/dialup-stackmat/2014-03-14 21.42.27.jpg:
-  size: 1024x768
-/img/dialup-stackmat/2014-03-18 23.35.38.jpg:
-  size: 1024x768
-/img/dialup-stackmat/2014-04-17 18.42.30.jpg:
-  size: 1024x768
-/img/dialup-stackmat/FSKube_files/FSKube.brd.png:
-  size: 1303x889
-/img/dialup-stackmat/FSKube_files/FSKube.sch.png:
-  size: 1823x1248
-/img/dialup-stackmat/FSKube_files/board_bottom.png:
-  size: 500x338
-/img/dialup-stackmat/FSKube_files/board_outline.png:
-  size: 500x337
-/img/dialup-stackmat/FSKube_files/board_top.png:
-  size: 500x369
-/img/dialup-stackmat/FSKube_files/bottom_layer.png:
-  size: 500x350
-/img/dialup-stackmat/FSKube_files/bottom_silk_screen.png:
-  size: 121x234
-/img/dialup-stackmat/FSKube_files/bottom_solder_mask.png:
-  size: 500x316
-/img/dialup-stackmat/FSKube_files/drills.png:
-  size: 500x301
-/img/dialup-stackmat/FSKube_files/top_layer.png:
-  size: 500x327
-/img/dialup-stackmat/FSKube_files/top_silk_screen.png:
-  size: 500x370
-/img/dialup-stackmat/FSKube_files/top_solder_mask.png:
-  size: 500x316
-/img/dialup-stackmat/IMG_20140422_162324.jpg:
-  size: 1024x768
-/img/dialup-stackmat/IMG_20140422_183302.jpg:
-  size: 768x1024
-/img/dialup-stackmat/IMG_20140422_183309.jpg:
-  size: 768x1024
-/img/dialup-stackmat/IMG_20140422_190709.jpg:
-  size: 768x1024
-/img/dialup-stackmat/IMG_20140422_190723.jpg:
-  size: 768x1024
-/img/dialup-stackmat/Squarewave01CJC.png:
-  size: 600x442
-/img/dialup-stackmat/band-pass-filter-analysis.png:
-  size: 689x357
-/img/dialup-stackmat/band-pass-filter.png:
-  size: 1275x145
-/img/dialup-stackmat/board-fresh-from-osh-park.jpg:
-  size: 1024x768
-/img/dialup-stackmat/dan-cohen-signals.png:
-  size: 1099x140
-/img/dialup-stackmat/finished-board.jpg:
-  size: 1024x768
-/img/dialup-stackmat/fsk.jpg:
-  size: 1173x575
-/img/dialup-stackmat/no-filter-analysis.png:
-  size: 690x352
-/img/dialup-stackmat/no-filter.png:
-  size: 1275x145
-/img/dialup-stackmat/signal.jpg:
-  size: 834x149
-/img/dialup-stackmat/stackmat-fsk-gerty-nexus5-iphone3gs.png:
-  size: 1548x597
-/img/dialup-stackmat/stackmat.jpg:
-  size: 800x600
 /misc/ipp-passport/pics/maple.jpg:
   size: 800x450
 /misc/ipp-passport/pics/passport-closed.jpg:
@@ -74,51 +6,121 @@
   size: 548x500
 /misc/ipp-passport/pics/sun.jpg:
   size: 800x600
-/photoswipe/default-skin/default-skin.png:
+/public/img/IMG_1532.JPG:
+  size: 768x1024
+/public/img/dialup-stackmat/1.15_iphone3gs.png:
+  size: 1424x145
+/public/img/dialup-stackmat/2014-03-14 21.42.27.jpg:
+  size: 1024x768
+/public/img/dialup-stackmat/2014-03-18 23.35.38.jpg:
+  size: 1024x768
+/public/img/dialup-stackmat/2014-04-17 18.42.30.jpg:
+  size: 1024x768
+/public/img/dialup-stackmat/FSKube_files/FSKube.brd.png:
+  size: 1303x889
+/public/img/dialup-stackmat/FSKube_files/FSKube.sch.png:
+  size: 1823x1248
+/public/img/dialup-stackmat/FSKube_files/board_bottom.png:
+  size: 500x338
+/public/img/dialup-stackmat/FSKube_files/board_outline.png:
+  size: 500x337
+/public/img/dialup-stackmat/FSKube_files/board_top.png:
+  size: 500x369
+/public/img/dialup-stackmat/FSKube_files/bottom_layer.png:
+  size: 500x350
+/public/img/dialup-stackmat/FSKube_files/bottom_silk_screen.png:
+  size: 121x234
+/public/img/dialup-stackmat/FSKube_files/bottom_solder_mask.png:
+  size: 500x316
+/public/img/dialup-stackmat/FSKube_files/drills.png:
+  size: 500x301
+/public/img/dialup-stackmat/FSKube_files/top_layer.png:
+  size: 500x327
+/public/img/dialup-stackmat/FSKube_files/top_silk_screen.png:
+  size: 500x370
+/public/img/dialup-stackmat/FSKube_files/top_solder_mask.png:
+  size: 500x316
+/public/img/dialup-stackmat/IMG_20140422_162324.jpg:
+  size: 1024x768
+/public/img/dialup-stackmat/IMG_20140422_183302.jpg:
+  size: 768x1024
+/public/img/dialup-stackmat/IMG_20140422_183309.jpg:
+  size: 768x1024
+/public/img/dialup-stackmat/IMG_20140422_190709.jpg:
+  size: 768x1024
+/public/img/dialup-stackmat/IMG_20140422_190723.jpg:
+  size: 768x1024
+/public/img/dialup-stackmat/Squarewave01CJC.png:
+  size: 600x442
+/public/img/dialup-stackmat/band-pass-filter-analysis.png:
+  size: 689x357
+/public/img/dialup-stackmat/band-pass-filter.png:
+  size: 1275x145
+/public/img/dialup-stackmat/board-fresh-from-osh-park.jpg:
+  size: 1024x768
+/public/img/dialup-stackmat/dan-cohen-signals.png:
+  size: 1099x140
+/public/img/dialup-stackmat/finished-board.jpg:
+  size: 1024x768
+/public/img/dialup-stackmat/fsk.jpg:
+  size: 1173x575
+/public/img/dialup-stackmat/no-filter-analysis.png:
+  size: 690x352
+/public/img/dialup-stackmat/no-filter.png:
+  size: 1275x145
+/public/img/dialup-stackmat/signal.jpg:
+  size: 834x149
+/public/img/dialup-stackmat/stackmat-fsk-gerty-nexus5-iphone3gs.png:
+  size: 1548x597
+/public/img/dialup-stackmat/stackmat.jpg:
+  size: 800x600
+/public/img/jfly.jpg:
+  size: 1365x1365
+/public/photoswipe/default-skin/default-skin.png:
   size: 264x88
-/stackmat/asus_k004.png:
+/public/stackmat/asus_k004.png:
   size: 1422x152
-/stackmat/asus_zenfone.png:
+/public/stackmat/asus_zenfone.png:
   size: 1422x152
-/stackmat/fire_hd6.png:
+/public/stackmat/fire_hd6.png:
   size: 2560x322
-/stackmat/galaxy_nexus.png:
+/public/stackmat/galaxy_nexus.png:
   size: 1422x152
-/stackmat/galaxy_note_4.png:
+/public/stackmat/galaxy_note_4.png:
   size: 2560x343
-/stackmat/htc_desire_z.png:
+/public/stackmat/htc_desire_z.png:
   size: 1438x152
-/stackmat/iphone_3gs.png:
+/public/stackmat/iphone_3gs.png:
   size: 1422x152
-/stackmat/lg_e460.png:
+/public/stackmat/lg_e460.png:
   size: 1567x152
-/stackmat/lg_lg65_d280.png:
+/public/stackmat/lg_lg65_d280.png:
   size: 1438x152
-/stackmat/moto_x_gen_2.png:
+/public/stackmat/moto_x_gen_2.png:
   size: 2560x372
-/stackmat/motorola_droid_1.png:
+/public/stackmat/motorola_droid_1.png:
   size: 1422x152
-/stackmat/motorola_xt603.png:
+/public/stackmat/motorola_xt603.png:
   size: 1422x152
-/stackmat/motorola_xt910.png:
+/public/stackmat/motorola_xt910.png:
   size: 1422x152
-/stackmat/nexus_4.png:
+/public/stackmat/nexus_4.png:
   size: 1422x152
-/stackmat/nexus_5.png:
+/public/stackmat/nexus_5.png:
   size: 1422x152
-/stackmat/nexus_6.png:
+/public/stackmat/nexus_6.png:
   size: 2560x253
-/stackmat/nexus_s.png:
+/public/stackmat/nexus_s.png:
   size: 1422x152
-/stackmat/samsung_chat.png:
+/public/stackmat/samsung_chat.png:
   size: 1438x152
-/stackmat/samsung_galaxy_s3.png:
+/public/stackmat/samsung_galaxy_s3.png:
   size: 1438x152
-/stackmat/samsung_galaxy_s4.png:
+/public/stackmat/samsung_galaxy_s4.png:
   size: 1438x152
-/stackmat/samsung_note.png:
+/public/stackmat/samsung_note.png:
   size: 1438x152
-/stackmat/wiko_rainbow.png:
+/public/stackmat/wiko_rainbow.png:
   size: 2560x170
 /temp/mario/images/american-flag-2a.jpg:
   size: 640x480

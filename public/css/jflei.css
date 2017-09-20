@@ -21,10 +21,6 @@ div.figure-wrapper {
     text-align: center;
 }
 
-figure {
-    display: inline-block;
-}
-
 figure img {
     display: inline;
     margin-bottom: 0; /* disable bottom padding to make room for figcaption */

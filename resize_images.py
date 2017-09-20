@@ -49,7 +49,7 @@ def resize(args):
                 else:
                     should_generate_thumbnail = False
 
-                url = path[1::].replace("public/", "")
+                url = path[1::]
                 image_data[url] = {
                     "size": get_image_size(path),
                 }

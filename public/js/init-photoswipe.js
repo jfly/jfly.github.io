@@ -68,6 +68,12 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
         });
 
+        //JFLY only activate when user clicks an actual <img> tag
+        if(eTarget.tagName.toUpperCase() != "IMG") {
+            return;
+        }
+        //JFLY
+
         if(!clickedListItem) {
             return;
         }
