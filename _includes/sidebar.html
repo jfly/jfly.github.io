@@ -3,7 +3,7 @@
     <div class="sidebar-about">
       <h1>
         <a href="{{ site.github.baseurl }}/">
-          {{ site.title }}
+          jflei.com
         </a>
       </h1>
       <p class="lead">{{ site.description }}</p>
@@ -12,6 +12,8 @@
     <nav class="sidebar-nav">
       {% assign root_url = "/" | prepend: site.github.baseurl %}
       <a class="sidebar-nav-item{% if page.url == root_url %} active{% endif %}" href="{{ site.github.baseurl }}/">Home</a>
+
+      <a class="sidebar-nav-item" href="https://github.com/jfly">jfly on GitHub</a>
 
       {% comment %}
         The code below dynamically generates a sidebar nav of pages with

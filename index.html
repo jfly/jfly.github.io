@@ -3,6 +3,17 @@ layout: default
 title: Home
 ---
 
+<div>
+  <img src="{{ site.github.baseurl }}/public/img/jfly.jpg" class="profile-pic">
+  <div class="show-one-column-profile-pic" style="text-align: center">That's me!<br></div>
+  <h1>Jeremy Fleischman</h1>
+  <span class="show-two-column-profile-pic">&lt;-- That's me!<br></span>
+  I am currently the leader of the World Cube Association Software Team.
+  You can find me on GitHub as <a href="https://github.com/jfly">jfly</a>.
+  Learn more about me <a href="{{site.github.baseurl }}/about/">here</a>.
+</div>
+<hr style="clear: both">
+
 <div class="posts">
   {% for post in paginator.posts %}
     {% unless post.hidden %}
