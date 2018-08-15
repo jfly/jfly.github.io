@@ -71,6 +71,14 @@ class AnalyzedUniverses(NamedTuple):
     def unknown_islanders(self):
         return self.totally_unknown_islanders | self.possibly_heavier_islanders | self.possibly_lighter_islanders
 
+    def key(self):
+        return (
+            len(self.normal_islanders),
+            len(self.totally_unknown_islanders),
+            len(self.possibly_heavier_islanders),
+            len(self.possibly_lighter_islanders),
+        )
+
 def analyze_universes(universes: Universes) -> AnalyzedUniverses:
     normal_islanders: Set = set()
     totally_unknown_islanders: Set = set()
@@ -139,67 +147,59 @@ def operate_scale(universes: Universes, operation: ScaleOperation) -> Dict[Scale
 
     return { result: frozenset(universes) for result, universes in universes_by_result.items() }
 
-def get_operations(universes: Universes) -> FrozenSet[ScaleOperation]:
+def split_set(s: FrozenSet, x: int, y: int):
+    """Extract x and y distinct elements from the given set."""
+    elements = list(itertools.islice(s, x + y))
+    return (elements[:x], elements[x:x+y])
+
+def get_operations(analyzed_universes: AnalyzedUniverses) -> FrozenSet[ScaleOperation]:
     """
-    There are 4 types of islanders:
-        1. known weight
+    There are 4 things we can know about an islander:
+        1. normal weight
         2. totally unknown weight
         3. possibly heavier
         4. possibly lighter
 
-    TODO <<< this is currently implemented extremely naively >>>
+    We want to generate all scale operations between these
+    islanders. It does not matter if these operations are "interesting" (it's
+    ok if the act of actually performing that operation gives us no new
+    information).
+
+    The set of all possible scale operations is:
+        { N normal, U unknown, H heavier, L lighter } vs
+        { 0 normal, U' unknown, H' heavier, L' lighter }
+    where N + U + H + L = U' + H' + L'
+    (note that there's never any value in putting normals on both sides of the scale)
     """
-
     operations: Set[ScaleOperation] = set()
-
-    analyzed_universes = analyze_universes(universes)
-    if len(analyzed_universes.normal_islanders) > 0:
-        normal_islander = next(iter(analyzed_universes.normal_islanders))
-        unknown_islander = next(iter(analyzed_universes.unknown_islanders()))
-        operations.add(ScaleOperation(left_side=frozenset({unknown_islander}), right_side=frozenset({normal_islander})))
-    else:
-        totally_unknown_islander = None
-        if len(analyzed_universes.totally_unknown_islanders) > 0:
-            totally_unknown_islander = next(iter(analyzed_universes.totally_unknown_islanders))
-
-        possibly_heavier_islander = None
-        if len(analyzed_universes.possibly_heavier_islanders) > 0:
-            possibly_heavier_islander = next(iter(analyzed_universes.possibly_heavier_islanders))
-
-        possibly_lighter_islander = None
-        if len(analyzed_universes.possibly_lighter_islanders) > 0:
-            possibly_lighter_islander = next(iter(analyzed_universes.possibly_lighter_islanders))
-
-        left_islander = None
-        right_islander = None
-        if totally_unknown_islander is not None:
-            left_islander = totally_unknown_islander
-            right_islander = possibly_heavier_islander or possibly_lighter_islander
-            if right_islander is None:
-                i = iter(analyzed_universes.totally_unknown_islanders)
-                next(i)
-                right_islander = next(i)
-        elif possibly_heavier_islander is not None:
-            left_islander = possibly_heavier_islander
-            i = iter(analyzed_universes.possibly_heavier_islanders)
-            next(i)
-            right_islander = next(i)
-        else:
-            left_islander = possibly_lighter_islander
-            i = iter(analyzed_universes.possibly_lighter_islanders)
-            next(i)
-            right_islander = next(i)
-
-
-        assert left_islander is not None and right_islander is not None
-        operations.add(ScaleOperation(left_side=frozenset({left_islander}), right_side=frozenset({right_islander})))
-
+    for n in range(len(analyzed_universes.normal_islanders) + 1):
+        for u in range(len(analyzed_universes.totally_unknown_islanders) + 1):
+            for h in range(len(analyzed_universes.possibly_heavier_islanders) + 1):
+                for l in range(len(analyzed_universes.possibly_lighter_islanders) + 1):
+                    left_count = (n + u + h + l)
+                    if left_count == 0:
+                        continue
+                    for u2 in range(len(analyzed_universes.totally_unknown_islanders) + 1 - u):
+                        for h2 in range(len(analyzed_universes.possibly_heavier_islanders) + 1 - h):
+                            l2 = left_count - (u2 + h2)
+                            if 0 <= l2 <= len(analyzed_universes.possibly_lighter_islanders) - l:
+                                left_normal, _ = split_set(analyzed_universes.normal_islanders, n, 0)
+                                left_unknown, right_unknown = split_set(analyzed_universes.totally_unknown_islanders, u, u2)
+                                left_heavier, right_heavier = split_set(analyzed_universes.possibly_heavier_islanders, h, h2)
+                                left_lighter, right_lighter = split_set(analyzed_universes.possibly_lighter_islanders, l, l2)
+                                left_side = frozenset(
+                                    left_normal + left_unknown + left_heavier + left_lighter
+                                )
+                                right_side = frozenset(
+                                    right_unknown + right_heavier + right_lighter
+                                )
+                                operations.add(ScaleOperation(left_side, right_side))
     return frozenset(operations)
 
 class ScoredOperation(NamedTuple):
     score: int
     operation: Optional[ScaleOperation]
-        
+
 def dump_args(func):
     depth = 0
     def wrapper(universes):
@@ -217,8 +217,23 @@ def dump_args(func):
         return ret_val
     return wrapper
 
-@dump_args
+def get_worst_result_score(universes: Universes, operation: ScaleOperation) -> Optional[int]:
+    # Consider all the possible results of this operation, and figure out the worst cost.
+    worst_result_score = None
+    for result, next_universes in operate_scale(universes, operation).items():
+        if next_universes == universes:
+            # This operation gave us no new information, totally ignore it.
+            return None
+        score = search(next_universes).score + 1
+        if worst_result_score is None or score > worst_result_score:
+            worst_result_score = score
+
+    return worst_result_score
+
+memoed: Dict[Tuple, ScoredOperation] = {} #<<<
+#<<< @dump_args
 def search(universes: Universes) -> ScoredOperation:
+
     if len(universes) == 1:
         return ScoredOperation(0, None)
     elif len(universes) == 2:
@@ -226,20 +241,22 @@ def search(universes: Universes) -> ScoredOperation:
         if universe_1.islander == universe_2.islander:
             return ScoredOperation(0, None)
 
-    best_scored_operation = None
-    for operation in get_operations(universes):
-        # Consider all the possible results of this operation, and figure out the worst cost.
-        worst_result_score = None
-        for result, next_universes in operate_scale(universes, operation).items():
-            score = search(next_universes).score + 1
-            if worst_result_score is None or score > worst_result_score:
-                worst_result_score = score
+    analyzed_universes = analyze_universes(universes)
+    global memoed
+    result = memoed.get(analyzed_universes.key(), None)
+    if result is not None:
+        return result
 
-        assert worst_result_score is not None
+    best_scored_operation = None
+    for operation in get_operations(analyzed_universes):
+        worst_result_score = get_worst_result_score(universes, operation)
+        if worst_result_score is None:
+            continue
         if best_scored_operation is None or worst_result_score < best_scored_operation.score:
             best_scored_operation = ScoredOperation(worst_result_score, operation)
 
     assert best_scored_operation is not None
+    memoed[analyzed_universes.key()] = best_scored_operation #<<<
     return best_scored_operation
 
 UNIVERSES = [ Universe(islander, weight) for islander in Islander for weight in Weight ]
