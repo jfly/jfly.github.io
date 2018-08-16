@@ -1,0 +1,14 @@
+[MESSAGES CONTROL]
+
+disable=
+    too-few-public-methods,
+    too-many-nested-blocks,
+    len-as-condition,
+    global-statement,
+    invalid-name,
+    no-else-return,
+    inconsistent-return-statements
+
+[FORMAT]
+# Maximum number of characters on a single line.
+max-line-length=250

@@ -2,5 +2,5 @@
 
 .PHONY: run
 run:
-	mypy main.py
+	mypy --ignore-missing-imports main.py
 	python main.py
