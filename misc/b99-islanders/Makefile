@@ -1,6 +1,10 @@
 .DEFAULT_GOAL := run
 
+.PHONY: bootstrap
+bootstrap:
+	pipenv install
+
 .PHONY: run
-run:
-	mypy --ignore-missing-imports main.py
-	python main.py
+run: bootstrap
+	pipenv run mypy --ignore-missing-imports main.py
+	pipenv run python main.py
