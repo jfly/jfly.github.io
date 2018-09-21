@@ -1,0 +1,24 @@
+FROM python:3
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y vim
+RUN pip install flanker==0.9.0
+RUN echo 'from multiprocessing import Process\n\
+import sys\n\
+\n\ 
+def someFunc():\n\
+    from flanker.addresslib import address\n\
+    print(address)\n\
+\n\
+ps = [ Process(target=someFunc) for _ in range(10) ]\n\
+\n\
+for p in ps:\n\
+    p.start()\n\
+for p in ps:\n\
+    p.join()\n\
+    if p.exitcode != 0:\n\
+        sys.exit(p.exitcode)\n\
+' > importing.py
+
+ENTRYPOINT [ "python", "importing.py" ]
