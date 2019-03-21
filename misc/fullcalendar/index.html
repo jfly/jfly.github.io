@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>full-calendar basic example</title>
+
+        <meta charset="utf-8" />
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="//fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.css">
+        <script type="text/javascript" src="//fullcalendar.io/js/fullcalendar-2.2.5/lib/moment.min.js"></script>
+        <script type="text/javascript" src="//fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.min.js"></script>
+
+    </head>
+    <body>
+        <div id='calendar'></div>
+
+        <script type="text/javascript">
+                    $('#calendar').fullCalendar({
+                        height: 'auto',
+                        slotDuration: '01:00:00',
+
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        defaultDate: '2014-06-12',
+                        defaultView: 'agendaWeek',
+                        editable: true,
+                        events: [
+                            {
+                                title: 'Bad?',
+                                start: '2014-06-12T20:30:00',
+                                end: '2014-06-13T20:30:00',
+                            },
+                            {
+                                title: 'Good',
+                                start: '2014-06-13T20:30:00',
+                                end: '2014-06-14T08:30:00',
+                            },
+                        ]
+                    });
+        </script>
+    </body>
+</html>
