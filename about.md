@@ -16,8 +16,7 @@ I particularly love to combine my
 
 ### Present
 
-I am the leader of the
-[World Cube Association Software Team](https://www.worldcubeassociation.org/contact).
+I am helping build the future of caregiving at [Honor](https://www.joinhonor.com).
 
 ### Past
 
@@ -47,6 +46,8 @@ I worked at [Arista Networks](https://www.arista.com) from August 2010 to
 March 2015, when I left to found and lead the WCA Software Team.
 
 I worked at [Saddle Point Systems](https://www.saddlepointsystems.com/resources/about/) from December 2015 to May 2016.
+
+I led the [World Cube Association Software Team](https://www.worldcubeassociation.org/contact) from March 2015 to October 2019.
 
 ### Projects I'm particularly proud of
 
