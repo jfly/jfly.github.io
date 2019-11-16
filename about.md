@@ -24,7 +24,7 @@ I graduated from San Clemente High School in 2006, and UC Berkeley in 2010.
 
 [Dan Dzoan](https://www.worldcubeassociation.org/results/p.php?i=2006DZOA03)
 passed the presidency of the
-[Rubik's Cube club at Berkeley](http://cubing.berkeley.edu/) to me in January 2008. While president,
+[Rubik's Cube club at Berkeley](https://cube.berkeley.edu/) to me in January 2008. While president,
 I organized 7 Rubik's cube competitions to varying degrees of success. I also
 ran the speedcubing DeCal, and was an instructor for the beginner's Rubik's
 Cube DeCal.
@@ -57,13 +57,14 @@ I led the [World Cube Association Software Team](https://www.worldcubeassociatio
 <a name="ti"></a>
 I got a TI-83+ for high school, and became fascinated with calculator games. I
 couldn't understand why the games I wrote in TI-BASIC ran so much slower than the amazing
-[Phoenix](http://www.ticalc.org/archives/files/fileinfo/148/14876.html). This
-led me to [United TI](unitedti.org) and [ticalc](ticalc.org), where I
+[Phoenix](https://www.ticalc.org/archives/files/fileinfo/148/14876.html). This
+led me to [United TI](https://www.cemetech.net/projects/uti/index.php?sid=2b849d68f687595c84f032f87d382c52)
+and [ticalc](https://ticalc.org), where I
 learned about assembly programming. I struggled through a tutorial on Z80
 assembly, and eventually completed
-[The Poopsmith](http://www.ticalc.org/archives/files/fileinfo/317/31775.html).
+[The Poopsmith](https://www.ticalc.org/archives/files/fileinfo/317/31775.html).
 * 2007-2010:
-Developed [CCT](http://cct.cubing.net/) along with
+Developed [CCT](https://cct.cubing.net/) along with
 [Ryan Zheng](https://www.worldcubeassociation.org/results/p.php?i=2006ZHEN02),
 the
 [first](https://groups.yahoo.com/neo/groups/speedsolvingrubikscube/conversations/messages/34984)
@@ -71,12 +72,12 @@ piece of software to interface with a stackmat timer over an audio cable.
 * 2008:
 Wrote a 2x2x2 solver for [Gamescrafters](http://gamescrafters.berkeley.edu/alumni.php).
 Built a simulator blatantly modeled after Ryan Heise's
-seminal [heise sim](http://www.ryanheise.com/cube/speed.html). This eventually
+seminal [heise sim](https://www.ryanheise.com/cube/speed.html). This eventually
 grew into a suite of simulators known as
-[jflysim](http://jfly.cubing.net/jflysim/qqTimer.html).
+[jflysim](https://www.ocf.berkeley.edu/~jfly/projects/qqTimer/qqTimer.htm).
 * February 6-7, 2010:
 Participated in the [UC Berkeley
-Hackathon](http://archive.dailycal.org/article.php?id=108145) with [Peter
+Hackathon](https://webcache.googleusercontent.com/search?q=cache:og9pPp2Jz7oJ:https://archive.dailycal.org/article.php%3Fid%3D108145+&cd=1&hl=en&ct=clnk&gl=us) with [Peter
 Battaglino](https://www.worldcubeassociation.org/results/p.php?i=2009BATT02),
 [Kevin
 Jorgensen](https://www.worldcubeassociation.org/results/p.php?i=2006JORG01),
@@ -85,13 +86,13 @@ Kwong](https://www.worldcubeassociation.org/results/p.php?i=2005KWON01).
 Developed an [ascii Rubik's cube
 simulator](https://github.com/jfly/Hackathon2010) in python with ncurses. We
 each won $20 to Cheeseboard =). See [Kevin's writeup of the
-event](http://spacestation77.wordpress.com/2010/02/07/berkeley-hackathon-2010/)
+event](https://spacestation77.wordpress.com/2010/02/07/berkeley-hackathon-2010/)
 and [Peter's rewrite from scratch](https://github.com/peterbat/rubikon).
 * 2010:
 <a name="tnoodle"></a>
-After finding myself occasionally using [qqtimer](http://www.qqtimer.net/),
+After finding myself occasionally using [qqtimer](https://www.qqtimer.net/),
 I finally admitted to myself that webapps are generally easier to use than
-desktop apps. I abandonded CCT, and starting writing a webtimer (which eventually became [TNT](http://www.jflei.com/tnt/)). Too
+desktop apps. I abandonded CCT, and starting writing a webtimer (which eventually became [TNT](https://www.jflei.com/tnt/). Too
 lazy to port CCT's scrambling and drawing code to javascript, I decided to
 generate scrambles server side, and
 [TNoodle was born](https://github.com/cubing/tnoodle/commit/ccdada3b9e29b545a6c2274c2890fc229723fda8). 
