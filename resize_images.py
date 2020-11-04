@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
+import argparse
 import os
 import re
-import yaml
-import argparse
 import subprocess
-from os.path import join, exists
+import sys
+from dataclasses import dataclass
+from os.path import exists, join
+from textwrap import dedent
+
+import yaml
 
 EXTENSIONS = "(jpg|png)"
 IMAGE_RE = re.compile(r".*\.{}".format(EXTENSIONS), re.IGNORECASE)
@@ -23,8 +27,38 @@ def is_thumbnail_image(name):
 def get_thumbnail_name(name):
     return name[::-1].replace(".", ".bmuht-", 1)[::-1]
 
-def get_image_size(path):
-    return subprocess.check_output(["identify", "-format", "%G", path]).decode("utf-8")
+@dataclass
+class Dimension:
+    width: int
+    height: int
+
+    @classmethod
+    def parse(cls, s):
+        width, height = s.split("x")
+        return cls(
+            width=int(width),
+            height=int(height),
+        )
+
+    def __str__(self):
+        return f"{self.width}x{self.height}"
+
+@dataclass
+class ImageMetadata:
+    size: Dimension
+    orientation: int
+
+def get_image_metadata(path) -> ImageMetadata:
+    raw_data = subprocess.check_output(["identify", "-format", "%[EXIF:*]RESOLUTION=%G", path]).decode("utf-8")
+    grouped_data = {}
+    for item in raw_data.split("\n"):
+        key, value = item.split("=")
+        grouped_data[key] = value
+
+    return ImageMetadata(
+        size=Dimension.parse(grouped_data['RESOLUTION']),
+        orientation=int(grouped_data.get('exif:Orientation', '1')), # Not all image filetypes have exif data
+    )
 
 def resize(args):
     image_data = {}
@@ -34,9 +68,24 @@ def resize(args):
             if path.startswith("./_site"):
                 continue
             if is_master_image(name):
+                image_metadata = get_image_metadata(path)
                 thumbnail_name = get_thumbnail_name(name)
                 thumbnail_path = join(root, thumbnail_name)
                 thumbnail_exists = exists(thumbnail_path)
+
+
+                # Check if the image is in need of auto rotation.
+                # See https://jdhao.github.io/2019/07/31/image_rotation_exif_info/
+                if image_metadata.orientation != 1:
+                    print(dedent(f"""\
+                        This image is in need of auto-orientation (exif:Orientation={image_metadata.orientation}): {path}
+
+                        To fix this, try something like:
+
+                            mogrify -auto-orient {path}
+                            rm {thumbnail_path}  # In case a thumbnail already exists\
+                    """))
+                    sys.exit(1)
 
                 should_generate_thumbnail = None
                 if not thumbnail_exists or args.force:
@@ -51,7 +100,7 @@ def resize(args):
 
                 url = path[1::]
                 image_data[url] = {
-                    "size": get_image_size(path),
+                    "size": str(image_metadata.size),
                 }
 
                 if should_generate_thumbnail and not args.dry_run:
