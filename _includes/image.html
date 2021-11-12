@@ -1,8 +1,7 @@
 <div class="figure-wrapper">
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-        <a href="{{ include.src }}" itemprop="contentUrl" data-size="{{ site.data.images[include.src].size }}">
-            <img src="{{ include.src | split: "" | reverse | join: "" | replace_first: ".", ".bmuht-" | split: "" | reverse
-    | join: "" }}" itemprop="thumbnail" alt="{{ include.alt }}" />
+        <a href="{{ include.src | relative_url }}" itemprop="contentUrl" data-size="{{ site.data.images[include.src].size }}">
+            <img src="{{ include.src | split: "" | reverse | join: "" | replace_first: ".", ".bmuht-" | split: "" | reverse | join: "" | relative_url }}" itemprop="thumbnail" alt="{{ include.alt }}" />
         </a>
         <figcaption itemprop="caption description">{{ include.alt }}</figcaption>
     </figure>

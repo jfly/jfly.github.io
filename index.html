@@ -4,13 +4,13 @@ title: Home
 ---
 
 <div>
-  <img src="{{ site.github.baseurl }}/public/img/jfly.jpg" class="profile-pic">
+  <img src="{{ '/public/img/jfly.jpg' | relative_url }}" class="profile-pic">
   <div class="show-one-column-profile-pic" style="text-align: center">That's me!<br></div>
   <h1>Jeremy Fleischman</h1>
   <span class="show-two-column-profile-pic">&lt;-- That's me!<br></span>
   I am helping build the future of caregiving at <a href="https://www.joinhonor.com">Honor</a>.
   You can find me on GitHub as <a href="https://github.com/jfly">jfly</a>.
-  Learn more about me <a href="{{site.github.baseurl }}/about/">here</a>.
+  Learn more about me <a href="{{ '/about/' | relative_url }}">here</a>.
 </div>
 <hr style="clear: both">
 
@@ -33,18 +33,18 @@ title: Home
 </div>
 
 <div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.github.baseurl }}/page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
   {% if paginator.previous_page %}
     {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.github.baseurl }}/">Newer</a>
+      <a class="pagination-item newer" href="{{ '/' | relative_url }}">Newer</a>
     {% else %}
-      <a class="pagination-item newer" href="{{ site.github.baseurl }}/page{{paginator.previous_page}}">Newer</a>
+      <a class="pagination-item newer" href="{{ '/page' | append: paginator.previous_page | relative_url }}">Newer</a>
     {% endif %}
   {% else %}
     <span class="pagination-item newer">Newer</span>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="{{ '/page' | append: paginator.next_page | relative_url }}">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
   {% endif %}
 </div>
