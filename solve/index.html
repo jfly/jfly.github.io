@@ -2,6 +2,14 @@
     <head>
         <script type="module">
             import { TwistyPlayer } from "https://cdn.cubing.net/js/cubing/twisty";
+
+            function one(arr) {
+                if(arr.length != 1) {
+                    throw new Error("Expected array to be length 1", arr);
+                }
+                return arr[0];
+            }
+
             class LlAlg extends HTMLElement {
                 constructor() {
                     super();
@@ -40,17 +48,19 @@
                 constructor() {
                     super();
 
+                    const child = one(this.children);
+
                     const tocLink = document.createElement('a');
                     tocLink.href = '#toc';
-                    tocLink.innerText = "^";
+                    const upLink = document.createElement(child.tagName.toLowerCase());
+                    upLink.innerText = "▲";
+                    tocLink.appendChild(upLink);
                     this.appendChild(tocLink);
 
                     const sectionLink = document.createElement('a');
                     sectionLink.classList.add('js-section-link');
                     sectionLink.href = '#' + this.getAttribute("id");
-                    for(const child of this.children) {
-                        sectionLink.appendChild(child);
-                    }
+                    sectionLink.appendChild(child);
 
                     this.appendChild(sectionLink);
 
@@ -124,10 +134,10 @@
             }
             toc-item a[href="#toc"]:first-child {
                 margin-right: 15px;
-                text-decoration: auto;
+                text-decoration: none;
             }
             toc-item a[href="#toc"]:first-child:hover {
-                text-decoration: underline;
+                color: var(--marked);
             }
             toc-item#toc a[href="#toc"]:first-child {
                 visibility: hidden;
@@ -141,7 +151,7 @@
                 background: var(--accent-bg);
             }
             @media not print {
-                toc-item > a:hover > ::after {
+                toc-item > a.js-section-link:hover > ::after {
                     content: " #";
                 }
             }
@@ -183,7 +193,7 @@
         </p>
 
         <p>
-            Many tutorials optimize for minimizing memorization but burden you
+            Many tutorials optimize for minimal memorization but burden you
             with awkward pattern recognition and innefficient algorithms.
         </p>
         <p>
