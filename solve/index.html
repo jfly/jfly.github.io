@@ -1,0 +1,452 @@
+<html>
+    <head>
+        <script type="module">
+            import { TwistyPlayer } from "https://cdn.cubing.net/js/cubing/twisty";
+            class LlAlg extends HTMLElement {
+                constructor() {
+                    super();
+
+                    const shadow = this.attachShadow({mode: 'open'});
+
+                    const alg = this.getAttribute('alg');
+                    const experimentalStickeringMaskOrbits = {
+                        // Note: 2d svg centers are a bit weird and using O
+                        // doesn't do the right thing. So, we use "regular" (-)
+                        // just like this code:
+                        // https://github.com/cubing/cubing.js/blob/2f1f395f6bbdf0485de3b8524d038d56d6978580/src/cubing/puzzles/stickerings/cube-like-stickerings.ts#L56
+                        "orient-edges": "EDGES:DDDDOOOODDDD,CORNERS:IIIIIIII,CENTERS:DDDDD-",
+                        "orient-corners": "EDGES:DDDDOOOODDDD,CORNERS:DDDDOOOO,CENTERS:DDDDD-",
+                        "permute-corners": "EDGES:DDDDooooDDDD,CORNERS:DDDD----,CENTERS:DDDDD-",
+                        "permute-edges": "EDGES:DDDD----DDDD,CORNERS:DDDDDDDD,CENTERS:DDDDD-",
+                    }[this.getAttribute("step")];
+                    this.twisty = new TwistyPlayer({
+                      puzzle: "3x3x3",
+                      experimentalSetupAnchor: "end",
+                      experimentalSetupAlg: "z2",
+                      experimentalStickeringMaskOrbits,
+                      background: "none",
+                      controlPanel: "none",
+                      visualization: "experimental-2D-LL",
+                      alg,
+                    });
+
+                    shadow.appendChild(this.twisty);
+                }
+            }
+
+            window.customElements.define('ll-alg', LlAlg);
+
+            class TocItem extends HTMLElement {
+                constructor() {
+                    super();
+
+                    const tocLink = document.createElement('a');
+                    tocLink.href = '#toc';
+                    tocLink.innerText = "^";
+                    this.appendChild(tocLink);
+
+                    const sectionLink = document.createElement('a');
+                    sectionLink.classList.add('js-section-link');
+                    sectionLink.href = '#' + this.getAttribute("id");
+                    for(const child of this.children) {
+                        sectionLink.appendChild(child);
+                    }
+
+                    this.appendChild(sectionLink);
+
+                    for(const toc of document.querySelectorAll('table-of-contents')) {
+                        if(toc.regen) {
+                            toc.regen();
+                        }
+                    }
+                }
+            }
+            window.customElements.define('toc-item', TocItem);
+
+            class Toc extends HTMLElement {
+                constructor() {
+                    super();
+
+                    this.loading = true;
+                    window.addEventListener('load', () => {
+                        this.loading = false;
+                        this.regen();
+                    });
+
+                    this.innerHTML = `
+                        <toc-item id="toc"><h1>Table of Contents</h1></toc-item>
+                    `;
+                }
+
+                regen() {
+                    if(this.loading) {
+                        // Don't waste any effort: let's wait for the page to finish loading.
+                        return;
+                    }
+
+                    const ulStack = [document.createElement('ul')];
+
+                    for(const tocItem of document.querySelectorAll('toc-item:not(#toc)')) {
+                        const sectionLink = tocItem.querySelector('a.js-section-link');
+                        const sectionId = tocItem.id;
+                        const nthHeading = sectionLink.children[0].tagName.toLowerCase();
+                        const level = parseInt(nthHeading.substring(1));
+
+                        while(level < ulStack.length) {
+                            ulStack.pop();
+                        }
+                        while(level > ulStack.length) {
+                            const newUl = document.createElement('ul');
+                            ulStack[ulStack.length - 1].appendChild(newUl);
+                            ulStack.push(newUl);
+                        }
+                        const ul = ulStack[ulStack.length - 1];
+                        
+                        const li = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = '#' + sectionId;
+                        link.innerText = sectionLink.innerText;
+                        li.appendChild(link);
+                        ul.appendChild(li);
+                    }
+
+                    this.appendChild(ulStack[0]);
+                }
+            }
+            window.customElements.define('table-of-contents', Toc);
+        </script>
+
+        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+        <style>
+            toc-item {
+                display: flex;
+                align-items: center;
+            }
+            toc-item a[href="#toc"]:first-child {
+                margin-right: 15px;
+                text-decoration: auto;
+            }
+            toc-item a[href="#toc"]:first-child:hover {
+                text-decoration: underline;
+            }
+            toc-item#toc a[href="#toc"]:first-child {
+                visibility: hidden;
+            }
+            @media print {
+                toc-item a[href="#toc"]:first-child {
+                    display: none;
+                }
+            }
+            toc-item:target {
+                background: var(--accent-bg);
+            }
+            @media not print {
+                toc-item > a:hover > ::after {
+                    content: " #";
+                }
+            }
+
+            twisty-player {
+                width: 100%;
+            }
+
+            .side-by-side {
+                display: flex;
+                text-align: center;
+            }
+            .side-by-side > * {
+                flex: 1;
+            }
+            .side-by-side.center-vert {
+                align-items: center;
+            }
+            .side-by-side > :last-child {
+                border-left: 2px solid var(--text);
+            }
+            .side-by-side span {
+                padding: 5px;
+            }
+
+            .piece-examples twisty-player {
+                max-width: 200px;
+                max-height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <small>Version: 2022.12.28</small>
+        <p>
+            Here are some notes on how I teach people to solve Rubik's Cube
+            with a beginner's layer by layer method. There's no substitute for
+            being taught in person, but if you're dedicated and patient, you
+            can use the information on this page to solve Rubik's Cube.
+        </p>
+
+        <p>
+            Many tutorials optimize for minimizing memorization but burden you
+            with awkward pattern recognition and innefficient algorithms.
+        </p>
+        <p>
+            The method described here is largely inspired by what we taught at
+            the Berkeley Rubik's Cube <a href="https://decal.berkeley.edu/about/decal-program">DeCal</a>.
+
+            Every algorithm here is used by world class speedcubers. After you
+            learn this method, if you want to get faster, you won't have to
+            unlearn anything.
+        </p>
+
+        <p>
+            Happy cubing!
+            <br />
+            Jeremy Fleischman (<a href="https://www.worldcubeassociation.org/persons/2005FLEI01">2005FLEI01</a>)
+            <br />
+        </p>
+
+        <table-of-contents></table-of-contents>
+
+        <toc-item id="overview"><h1>Overview</h1></toc-item>
+        <p>
+            The cube is made up of 3 types of pieces: <strong>corners</strong>,
+            <strong>edgers</strong>, and <strong>centers</strong>.
+            Corners have 3 stickers, edges have 2 stickers, and centers have 1 sticker.
+        </p>
+
+        <div class="piece-examples">
+            <div class="side-by-side center-vert">
+                <twisty-player
+                    control-panel="none"
+                    background="none"
+                    hint-facelets="none"
+                    experimental-stickering-mask-orbits="EDGES:IIIIIIIIIIII,CORNERS:-IIIIIII,CENTERS:IIIIII"
+                    ></twisty-player>
+                <span>
+                    <p>The green-white-red corner.</p>
+                    <p>Corners are unique. There is exactly 1 green-white-red corner.</p>
+                </span>
+            </div>
+
+            <div class="side-by-side center-vert">
+                <twisty-player
+                    control-panel="none"
+                    background="none"
+                    hint-facelets="none"
+                    experimental-stickering-mask-orbits="EDGES:-IIIIIIIIIII,CORNERS:IIIIIIII,CENTERS:IIIIII"
+                ></twisty-player>
+                <span>
+                    <p>The green-white edge.</p>
+                    <p>Edges are also unique. There is exactly 1 green-white edge.</p>
+                </span>
+            </div>
+
+            <div class="side-by-side center-vert">
+                <twisty-player
+                    control-panel="none"
+                    background="none"
+                    hint-facelets="none"
+                    experimental-stickering-mask-orbits="EDGES:IIIIIIIIIIII,CORNERS:IIIIIIII,CENTERS:-IIIII"
+                ></twisty-player>
+                <span>
+                    <p>The white center.</p>
+                    <p>Centers are also unique. There is exactly 1 white center.</p>
+                </span>
+            </div>
+        </div>
+
+        <p>
+            A cube has 6 <strong>faces</strong>, but only 3 <strong>layers</strong>.
+            The internal mechanism of a cube does not allow the centers to move
+            (they can only spin in place), so we can describe faces by the
+            color of their center piece.
+        </p>
+
+        <div class="side-by-side">
+            <span>
+                <twisty-player
+                    alg="D2' R F U' F' U2' D' F L' B2' R F2' R2' F2' U2' L B2' D2' F2' R2'"
+                    control-panel="none"
+                    background="none"
+                ></twisty-player>
+                On this cube, the white <strong>face</strong> is solved, but
+                the white <strong>layer</strong> is not solved. Note how the green
+                face has a mix of stickers along the top where there should
+                just be green stickers.
+            </span>
+
+            <span>
+                <twisty-player
+                    alg="U2' B2' D2' B2' U R2' U' B2' U' F2' D2' F2' L' F L' F2' L U' F D' R2'"
+                    control-panel="none"
+                    background="none"
+                ></twisty-player>
+                On this cube, the entire white <strong>face</strong> and
+                <strong>layer</strong> are solved. Note how on the green, red,
+                blue, and orange faces, there's a row of matching stickers
+                along the top.
+            </span>
+        </div>
+
+        <toc-item id="f2l"><h1>First Two Layers</h1></toc-item>
+        <p>
+            First Two Layers is sometimes abbreviated as F2L. More advanced
+            methods will actually tackle the first layer and the second layer
+            simultaneously, but we're going to do it one layer at a time for
+            now.
+        </p>
+
+        <toc-item id="cross"><h2>Step 1: Cross</h2></toc-item>
+        <p>
+            Here we solve the edges of the first layer. This can be done
+            intuitively, but it's helpful to see some examples.
+        </p>
+        <div class="side-by-side">
+          <span>
+            <twisty-player
+                alg="F2 L2 F2 R2 U' L2 B2 U' L2 D R' F D' R' D2 B U' L D2 U R' z2"
+                control-panel="none"
+                background="none"
+            ></twisty-player>
+            <strong>Start</strong>: scrambled cube
+          </span>
+          <span>
+            <twisty-player
+                alg="R2 B' D2 B R L2 B2 U F R2 U2 F2 L2 D L2 U L2 B2 R2 B2 z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----IIIIIIII,CORNERS:IIIIIIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>End</strong>: Solved cross
+          </span>
+        </div>
+
+        <p>
+            Note: this entire tutorial is drawn with a white cross on bottom
+            and a yellow last layer. Back when I started cubing, cubers
+            (incorrectly) thought it was best to start with the same
+            color each time. Nowadays, speedcubers agree that <a
+            href="https://www.speedsolving.com/wiki/index.php/Color_neutrality">color
+            neutrality</a> is best: feel free to start with whichever cross color looks
+            easiest.
+        </p>
+        <p>
+            TODO: add examples
+        </p>
+
+        <p>
+            Note: a populate alternative is to teach <a href="https://www.wired.com/story/how-to-solve-a-rubiks-cube-step-by-step/">Tyson Mao's Daisy method</a>
+            for the cross.
+            It's easier to learn, but is less efficient.
+        </p>
+
+        <toc-item id="first-layer"><h2>Step 2: Finish First Layer</h2></toc-item>
+        <p>Here we solve the rest of the first layer (which is just the corners).</p>
+        <div class="side-by-side">
+          <span>
+            <twisty-player
+                alg="R2 B' D2 B R L2 B2 U F R2 U2 F2 L2 D L2 U L2 B2 R2 B2 z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----IIIIIIII,CORNERS:IIIIIIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>Start</strong>: Solved cross
+          </span>
+          <span>
+            <twisty-player
+                alg="R' B' U B' D R2 F' U R' L2 F2 L2 U F2 U2 F2 D' R2 U' L2 B2 z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----IIIIIIII,CORNERS:----IIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>End</strong>: Solved First Layer
+          </span>
+        </div>
+        <p>TODO</p>
+
+        <toc-item id="second-layer"><h2>Step 3: Second Layer</h2></toc-item>
+        <p>Here we solve the second layer (which is just edges, the centers are already solved).</p>
+        <div class="side-by-side">
+          <span>
+            <twisty-player
+                alg="R' B' U B' D R2 F' U R' L2 F2 L2 U F2 U2 F2 D' R2 U' L2 B2 z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----IIIIIIII,CORNERS:----IIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>Start</strong>: Solved First Layer
+          </span>
+          <span>
+            <twisty-player
+                alg="F' D F2 L2 U L2 U B2 U' B L' B U' F2 D' F z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----IIII----,CORNERS:----IIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>End</strong>: Solved Second Layer
+          </span>
+        </div>
+        <p>TODO</p>
+
+        <toc-item id="last-layer"><h1>Last Layer</h1></toc-item>
+        <p>Just one more layer to go! Most of the cube is solved now, and
+        consequently, we're going to have to memorize 4 algorithms that modify
+        the last layer without screwing up any of the hard work we put into the
+        first two layers</p>
+
+        <toc-item id="orient-edges"><h2>Step 4: Orient Edges</h2></toc-item>
+        <p>TODO</p>
+        <div class="side-by-side">
+          <span>
+            <twisty-player
+                alg="F' D F2 L2 U L2 U B2 U' B L' B U' F2 D' F z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----IIII----,CORNERS:----IIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>Start</strong>: Solved F2L
+          </span>
+          <span>
+            <twisty-player
+                experimental-setup-alg="z2"
+                control-panel="none"
+                experimental-stickering-mask-orbits="EDGES:----OOOO----,CORNERS:----IIII,CENTERS:------"
+
+                background="none"
+            ></twisty-player>
+            <strong>End</strong>: Oriented last layer edges
+          </span>
+        </div>
+        <ll-alg alg="F R U R' U' F'" step="orient-edges"></ll-alg>
+        <ll-alg alg="F U R U' R' F'" step="orient-edges"></ll-alg>
+
+        <toc-item id="orient-corners"><h2>Step 5: Orient Corners</h2></toc-item>
+        <ll-alg alg="R U R' U R U2' R'" step="orient-corners"></ll-alg>
+
+        <toc-item id="permute-corners"><h2>Step 6: Permute Corners</h2></toc-item>
+        <ll-alg alg="R U R' U' R' F R2 U' R' U' R U R' F'" step="permute-corners"></ll-alg>
+
+        <toc-item id="permute-edges"><h2>Step 7: Permute Edges</h2></toc-item>
+        <ll-alg alg="F2 U R' L F2 L' R U F2" step="permute-edges"></ll-alg>
+
+        <toc-item id="next-steps"><h1>Next Steps</h1></toc-item>
+        <p>
+            Congratulations on learning to solve Rubik's Cube! With this method
+            and some practice, you should be able to solve under 60 seconds. If
+            you're having trouble breaking the 1 minute barrier, focus on
+            solving smoothly: turn slowly and try to eliminate pauses from your
+            solves (it's hard to do!)
+        </p>
+
+        <p>
+            Once you're under a minute, start learning
+            <a href="https://www.speedsolving.com/wiki/index.php/CFOP_method">CFOP</a>
+            (learn intuitive F2L, and start learning some OLLs and PLLs). Go to
+            a <a href="https://www.worldcubeassociation.org/competitions">WCA competition</a>, make some
+            friends, and learn!
+        </p>
+    </body>
+</html>
