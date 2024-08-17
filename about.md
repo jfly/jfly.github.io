@@ -6,7 +6,7 @@ title: About Me
 Hey there! My name is Jeremy Fleischman. I love the outdoors,
 [coding](https://github.com/jfly/),
 [reading](https://www.goodreads.com/user/show/51546534-jeremy-fleischman), and
-[speedcubing](https://www.worldcubeassociation.org/results/p.php?i=2005FLEI01).
+[speedcubing](https://www.worldcubeassociation.org/persons/2005FLEI01).
 I particularly love to combine my
 [interests](https://www.youtube.com/watch?v=seK7Kw4GR4o)
 [in](https://www.youtube.com/watch?v=3-TvSWPrBi4)
@@ -22,7 +22,7 @@ I am helping build the future of caregiving at [Honor](https://www.joinhonor.com
 
 I graduated from San Clemente High School in 2006, and UC Berkeley in 2010.
 
-[Dan Dzoan](https://www.worldcubeassociation.org/results/p.php?i=2006DZOA03)
+[Dan Dzoan](https://www.worldcubeassociation.org/persons/2006DZOA03)
 passed the presidency of the
 [Rubik's Cube club at Berkeley](https://cube.berkeley.edu/) to me in January 2008. While president,
 I organized 7 Rubik's cube competitions to varying degrees of success. I also
@@ -30,16 +30,16 @@ ran the speedcubing DeCal, and was an instructor for the beginner's Rubik's
 Cube DeCal.
 
 In March 2010, I handed the presidency to the amazing
-[Vincent Sheu](https://www.worldcubeassociation.org/results/p.php?i=2006SHEU01). Under
+[Vincent Sheu](https://www.worldcubeassociation.org/persons/2006SHEU01). Under
 Vincent (and as of this writing, the next 4 presidents!), the club has only
 continued to mature and grow. There is nothing I am more proud to have played a
 role in.
 
 Not long after graduating from Berkeley, I attended
-[US Nationals 2010](https://www.worldcubeassociation.org/results/c.php?i=USNationals2010)
+[US Nationals 2010](https://www.worldcubeassociation.org/competitions/USNationals2010)
 as a staff member and became US National Champion of one handed.
 
-At [Berkeley Spring 2013](https://www.worldcubeassociation.org/results/c.php?i=BerkeleySpring2013), I set the North American Record for one handed
+At [Berkeley Spring 2013](https://www.worldcubeassociation.org/competitions/BerkeleySpring2013), I set the North American Record for one handed
 single with an 11.28 second solve.
 
 I worked at [Arista Networks](https://www.arista.com) from August 2010 to
@@ -65,7 +65,7 @@ assembly, and eventually completed
 [The Poopsmith](https://www.ticalc.org/archives/files/fileinfo/317/31775.html).
 * 2007-2010:
 Developed [CCT](https://cct.cubing.net/) along with
-[Ryan Zheng](https://www.worldcubeassociation.org/results/p.php?i=2006ZHEN02),
+[Ryan Zheng](https://www.worldcubeassociation.org/persons/2006ZHEN02),
 the
 [first](https://groups.yahoo.com/neo/groups/speedsolvingrubikscube/conversations/messages/34984)
 piece of software to interface with a stackmat timer over an audio cable.
@@ -78,11 +78,11 @@ grew into a suite of simulators known as
 * February 6-7, 2010:
 Participated in the [UC Berkeley
 Hackathon](https://webcache.googleusercontent.com/search?q=cache:og9pPp2Jz7oJ:https://archive.dailycal.org/article.php%3Fid%3D108145+&cd=1&hl=en&ct=clnk&gl=us) with [Peter
-Battaglino](https://www.worldcubeassociation.org/results/p.php?i=2009BATT02),
+Battaglino](https://www.worldcubeassociation.org/persons/2009BATT02),
 [Kevin
-Jorgensen](https://www.worldcubeassociation.org/results/p.php?i=2006JORG01),
+Jorgensen](https://www.worldcubeassociation.org/persons/2006JORG01),
 and [Darren
-Kwong](https://www.worldcubeassociation.org/results/p.php?i=2005KWON01).
+Kwong](https://www.worldcubeassociation.org/persons/2005KWON01).
 Developed an [ascii Rubik's cube
 simulator](https://github.com/jfly/Hackathon2010) in python with ncurses. We
 each won $20 to Cheeseboard =). See [Kevin's writeup of the

@@ -51,7 +51,7 @@ Why hasn't this already been done? Unfortunately, it turns out that plugging a
 stackmat into a phone isn't as straightforward as plugging a stackmat into a
 computer (as CCT did).
 
-[Dan Cohen](https://www.worldcubeassociation.org/results/p.php?i=2007COHE01)
+[Dan Cohen](https://www.worldcubeassociation.org/persons/2007COHE01)
 wrote a stackmat interpreter in Objective-C in July 2010. He got it working in
 the iPhone simulator on his computer, but when he loaded it onto his
 phone, it just didn't work. The signal he recorded was so distorted as to be unreadable.
@@ -60,9 +60,9 @@ phone, it just didn't work. The signal he recorded was so distorted as to be unr
 
 In February 2012, I attended a hackathon at Berkeley with the intent of writing a
 stackmat to phone interpreter. I was joined by
-[Kevin Jorgensen](https://www.worldcubeassociation.org/results/p.php?i=2006JORG01),
-[Darren Kwong](https://www.worldcubeassociation.org/results/p.php?i=2005KWON01),
-and [Devin Corr-Robinett](https://www.worldcubeassociation.org/results/p.php?i=2006CORR01).
+[Kevin Jorgensen](https://www.worldcubeassociation.org/persons/2006JORG01),
+[Darren Kwong](https://www.worldcubeassociation.org/persons/2005KWON01),
+and [Devin Corr-Robinett](https://www.worldcubeassociation.org/persons/2006CORR01).
 After a few hours, we ran into the distortion that had thwarted Dan Cohen.
 
 {% include image.html src="/public/img/dialup-stackmat/1.15_iphone3gs.png" alt="Distorted signal on an iPhone 3Gs" %}
@@ -239,7 +239,7 @@ code is written in C++, and compiles to Javascript with
 web demo  at [http://www.jflei.com/fskube/](http://www.jflei.com/fskube/).
 Since the code is written in C++, it will be easy to develop an iOS app if we
 want to.
-[Patricia Li](https://www.worldcubeassociation.org/results/p.php?i=2009LIPA01),
+[Patricia Li](https://www.worldcubeassociation.org/persons/2009LIPA01),
 Darren Kwong, and I have already written an Android app using the
 [Android NDK](https://developer.android.com/tools/sdk/ndk/index.html).
 
