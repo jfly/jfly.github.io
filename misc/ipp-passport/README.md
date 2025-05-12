@@ -2,7 +2,7 @@
 
 Written in python3. Searches for a solution to these two jigsaw puzzles:
 
-![2 jigsaw puzzles](https://raw.githubusercontent.com/jfly/jfly.github.io/master/misc/ipp-passport/pics/pattern.jpg).
+![2 jigsaw puzzles](https://raw.githubusercontent.com/jfly/jfly.github.io/b3d103ef174480a8104a73dff2283954fb5c886c/misc/ipp-passport/pics/pattern.jpg).
 
 ## Usage
 

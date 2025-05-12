@@ -18,7 +18,7 @@ THUMBNAIL_RE = re.compile(r".*-thumb\.{}".format(EXTENSIONS), re.IGNORECASE)
 def is_image(name):
     return IMAGE_RE.match(name)
 
-def is_master_image(name):
+def is_og_image(name):
     return is_image(name) and not is_thumbnail_image(name)
 
 def is_thumbnail_image(name):
@@ -67,7 +67,7 @@ def resize(args):
             path = join(root, name)
             if path.startswith("./_site"):
                 continue
-            if is_master_image(name):
+            if is_og_image(name):
                 image_metadata = get_image_metadata(path)
                 thumbnail_name = get_thumbnail_name(name)
                 thumbnail_path = join(root, thumbnail_name)

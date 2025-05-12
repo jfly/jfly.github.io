@@ -24,13 +24,13 @@ And the [Japanese flag](https://en.wikipedia.org/wiki/Flag_of_Japan):
 {% include image.html alt="Japanese flag" src="/misc/ipp-passport/pics/sun.jpg" %}
 
 Almost immediately, I knew I wasn't going to solve this puzzle by hand. During a flight to Wisconsin yesterday, I got a chance to code up a solution in Python 3
-(see [GitHub](https://github.com/jfly/jfly.github.io/tree/master/misc/ipp-passport#ipp-passport)).
+(see [GitHub](https://github.com/jfly/jfly.github.io/tree/b3d103ef174480a8104a73dff2283954fb5c886c/misc/ipp-passport#ipp-passport)).
 
 To avoid spoilers, I won't post the solutions here, but you can find all the
 solutions to the maple leaf
-[here](https://github.com/jfly/jfly.github.io/blob/master/misc/ipp-passport/maples.txt),
+[here](https://github.com/jfly/jfly.github.io/blob/b3d103ef174480a8104a73dff2283954fb5c886c/misc/ipp-passport/maples.txt),
 and all the solutions to the sun
-[here](https://github.com/jfly/jfly.github.io/blob/master/misc/ipp-passport/suns.txt).
+[here](https://github.com/jfly/jfly.github.io/blob/b3d103ef174480a8104a73dff2283954fb5c886c/misc/ipp-passport/suns.txt).
 
 My implementation was straightforward [BFS](https://github.com/jfly/jfly.github.io/blob/4e6b0d37fece47359ac48c02a33e796516bf85ed/misc/ipp-passport/search.py#L13-L17)
 with some pruning
