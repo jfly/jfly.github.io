@@ -41,46 +41,5 @@ figcaption {
 }
 
 img.profile-pic {
-    max-width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.show-one-column-profile-pic {
-    display: inline;
-}
-div.show-one-column-profile-pic {
-    display: block;
-}
-.show-two-column-profile-pic {
-    display: none;
-}
-div.show-two-column-profile-pic {
-    display: none;
-}
-
-@media (min-width: 375px) {
-    .show-one-column-profile-pic {
-        display: none;
-    }
-    div.show-one-column-profile-pic {
-        display: none;
-    }
-
-    .show-two-column-profile-pic {
-        display: inline;
-    }
-    div.show-two-column-profile-pic {
-        display: block;
-    }
-
-    .content {
-        padding-top: 4rem;
-    }
-
-    img.profile-pic {
-        max-width: 50%;
-        float: left;
-        padding-right: 10px;
-    }
+    max-width: min(75%, 300px);
 }

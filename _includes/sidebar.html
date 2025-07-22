@@ -1,31 +1,29 @@
 {% assign root_url = "/" | relative_url %}
 <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>
-        <a href="{{ root_url }}">
-          jflei.com
-        </a>
-      </h1>
-      <p class="lead">{{ site.description }}</p>
+    <div class="container sidebar-sticky">
+        <div class="sidebar-about">
+            <h1>
+                <a href="{{ root_url }}">
+                    jflei.com
+                </a>
+            </h1>
+            <p class="lead">{{ site.description }}</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            {% assign pages_list = site.pages %}
+            {% for node in pages_list %}
+                {% assign paginated_blog_path_piece = site.paginate_path | replace: ':num', '' %}
+                {% if node.url contains paginated_blog_path_piece %}
+                    {% assign is_paginated_blog = true %}
+                {% else %}
+                    {% assign is_paginated_blog = false %}
+                {% endif %}
+
+                {% if node.title != null and node.layout == "page" and is_paginated_blog == false %}
+                    <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
+                {% endif %}
+            {% endfor %}
+        </nav>
     </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item{% if page.url == root_url %} active{% endif %}" href="{{ root_url }}">Home</a>
-
-      <a class="sidebar-nav-item" href="https://github.com/jfly">jfly on GitHub</a>
-
-      {% comment %}
-        The code below dynamically generates a sidebar nav of pages with
-        `layout: page` in the front-matter. See readme for usage.
-      {% endcomment %}
-
-      {% assign pages_list = site.pages %}
-      {% for node in pages_list %}
-        {% if node.title != null and node.layout == "page" and node.name != "README.md" %}
-          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
-        {% endif %}
-      {% endfor %}
-    </nav>
-  </div>
 </div>
