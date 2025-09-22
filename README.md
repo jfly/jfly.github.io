@@ -2,11 +2,18 @@
 
 Built on top of <https://github.com/poole/hyde>.
 
+## Locking dependencies
+
+Bundler does not include integrity hashes, so we use `bundix`:
+
+```console
+bundix --lock
+```
+
 ## Development
-- `bundle install`
-- `bundle exec jekyll serve --watch` - view <http://localhost:4000>
+
+- `make run` - view <http://localhost:4000>
 
 ## Generate thumbnails
-- `./resize_images.py`
 
-Third party css and JavaScript dependencies are managed by the script `thirdparty.sh`.
+- `nix run .#resize-images`

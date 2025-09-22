@@ -1,10 +1,5 @@
-_site
+/_site
 
-# Ignore bundler config
-.bundle
-
-# vim stuff
-*.swp
-
-# direnv
+# nix
+/result
 /.direnv
