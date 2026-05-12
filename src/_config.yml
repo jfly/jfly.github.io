@@ -23,12 +23,12 @@ permalink: pretty
 # Setup
 title: Jeremy Fleischman
 description: ""
-url: https://www.jflei.com
+url: https://www.jfly.fyi
 baseurl: ""
 
 author:
   name: 'Jeremy Fleischman'
-  url: https://www.jflei.com
+  url: https://www.jfly.fyi
 
 paginate: 1
 paginate_path: "/blog/page:num"

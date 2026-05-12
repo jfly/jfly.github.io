@@ -1,4 +1,4 @@
-# jflei.com
+# jfly.fyi
 
 Built on top of <https://github.com/poole/hyde>.
 

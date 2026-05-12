@@ -90,7 +90,7 @@ I worked as a principal engineer/senior staff engineer at [Honor](https://www.ho
   <a name="tnoodle"></a>
   After finding myself occasionally using [qqtimer](https://www.qqtimer.net/),
   I finally admitted to myself that webapps are generally easier to use than
-  desktop apps. I abandoned CCT, and starting writing a webtimer (which eventually became [TNT](https://www.jflei.com/tnt/). Too
+  desktop apps. I abandoned CCT, and starting writing a webtimer (which eventually became [TNT](https://www.jfly.fyi/tnt/). Too
   lazy to port CCT's scrambling and drawing code to JavaScript, I decided to
   generate scrambles server side, and
   [TNoodle was born](https://github.com/cubing/tnoodle/commit/ccdada3b9e29b545a6c2274c2890fc229723fda8).

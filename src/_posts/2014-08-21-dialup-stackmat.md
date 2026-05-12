@@ -236,7 +236,7 @@ With our custom board in hand, I wrote code to demodulate the FSK signal
 (see [jfly/fskube](https://github.com/jfly/fskube)). All that
 code is written in C++, and compiles to Javascript with
 [Emscripten](https://github.com/kripken/emscripten). This is what powers the
-web demo  at [http://www.jflei.com/fskube/](http://www.jflei.com/fskube/).
+web demo  at [http://www.jfly.fyi/fskube/](http://www.jfly.fyi/fskube/).
 Since the code is written in C++, it will be easy to develop an iOS app if we
 want to.
 [Patricia Li](https://www.worldcubeassociation.org/persons/2009LIPA01),
